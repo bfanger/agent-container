@@ -1,0 +1,5 @@
+[core]
+        autocrlf = false
+
+[alias]
+        st = status

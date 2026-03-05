@@ -1,0 +1,31 @@
+{
+  "providers": {
+    "llama-cpp": {
+      "baseUrl": "http://host.docker.internal:8080/v1",
+      "api": "openai-completions",
+      "apiKey": "none",
+      "models": [
+        {
+          "id": "unknown",
+          "name": "LLaMA C++"
+        },
+        {
+          "id": "unsloth/Qwen3.5-27B-GGUF",
+          "name": "Qwen3.5 27B",
+          "contextWindow": 45000
+        }
+      ]
+    },
+    "lm-studio": {
+      "baseUrl": "http://host.docker.internal:1234/v1",
+      "api": "openai-completions",
+      "apiKey": "none",
+      "models": [
+        {
+          "id": "unknown",
+          "name": "LM Studio"
+        }
+      ]
+    }
+  }
+}

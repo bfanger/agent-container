@@ -1,0 +1,16 @@
+volumes:
+  pnpmstore:
+  pacman_modules:
+  bakery_modules:
+services:
+  dev:
+    build: 
+      dockerfile: Dockerfile
+    volumes:
+      - ./projects:/home/user/projects
+      - pnpmstore:/home/user/projects/.pnpm-store
+      - pacman_modules:/home/user/projects/pacman/node_modules
+      - bakery_modules:/home/user/projects/bakery/node_modules
+    ports:
+      - 5173:5173
+      - 4096:4096
