@@ -6,13 +6,13 @@
       "apiKey": "none",
       "models": [
         {
-          "id": "unknown",
-          "name": "LLaMA C++"
-        },
-        {
           "id": "unsloth/Qwen3.5-27B-GGUF",
           "name": "Qwen3.5 27B",
-          "contextWindow": 45000
+          "contextWindow": 40000
+        },
+        {
+          "id": "default",
+          "name": "Default Model"
         }
       ]
     },
@@ -22,8 +22,8 @@
       "apiKey": "none",
       "models": [
         {
-          "id": "unknown",
-          "name": "LM Studio"
+          "id": "default",
+          "name": "Default Model"
         }
       ]
     }

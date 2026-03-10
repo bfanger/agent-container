@@ -5,26 +5,28 @@ RUN apt update && apt upgrade -y && apt install -y \
   neovim \
   xdg-utils \
   firefox-esr \
+  chromium \
+  ffmpeg \
   fd-find \
   ripgrep \
-  && npx playwright install firefox --with-deps \
   && npm -gf install npm \
+  && npx playwright install --with-deps \
   && pnpm self-update \
-  && apt clean && rm -rf /var/cache/apt/archives /var/lib/apt/lists
+  && apt clean && rm -rf /var/cache/apt/archives /var/lib/apt/lists  /root/.cache/ms-playwright/
 
 RUN useradd --create-home --shell /usr/bin/zsh user
 
 USER user
 WORKDIR /home/user
 RUN curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
-
-RUN pnpm self-update
+RUN npx -y playwright install
 
 RUN curl https://mise.run | sh
 ENV PATH="/home/user/.local/bin:$PATH"
 RUN echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
 RUN mise use opencode && mise use npm:@mariozechner/pi-coding-agent
 RUN ln -s `which fdfind` /home/user/.local/bin/fd
+RUN pnpm self-update
 
 COPY ./user /home/user
 

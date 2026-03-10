@@ -8,6 +8,13 @@
         "baseURL": "http://host.docker.internal:8080/v1"
       },
       "models": {
+        "unsloth/Qwen3.5-27B-GGUF": {
+          "name": "Qwen3.5 27B",
+          "limit": {
+            "context": 40000,
+            "output": 32000
+          }
+        },
         "unknown": {
           "name": "Unknown model"
         }

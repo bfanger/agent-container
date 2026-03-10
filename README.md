@@ -27,8 +27,14 @@ pi
 ### Running Qwen3.5 model with llama.cpp
 
 ```sh
- .\llama-server.exe --host 0.0.0.0 --port 4321 -m D:\ai-models\unsloth\Qwen3.5-27B-GGUF\Qwen3.5-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off -c 45000 --metrics
+ .\llama-server.exe -m D:\ai-models\unsloth\Qwen3.5-27B-GGUF\Qwen3.5-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off -c 40000 --no-mmap --metrics
 ```
+
+For opencode also add `--jinja`
+
+To enable vision add: `--mmproj D:\ai-models\unsloth\Qwen3.5-27B-GGUF\mmproj-F32.gguf` but also decrease the context to `-c 10000`
+
+And update ~/.pi/agent/models.json to `"input": ["text", "image"],`
 
 ## Learnings
 
@@ -41,6 +47,11 @@ pi
 ### Models
 
 - Gemma 12b: had trouble with using the tools and edits
-- GPT-OSS: fast, but likes to rewrite a lot, which can work.
-- Qwen: By default the smaller models gets stuck into thinking or are unable to solve an error it created.
+- GPT-OSS: fast, but likes to rewrite a lot, which can work, get errors when context grows
+- Qwen: The smaller models gets stuck into thinking or are unable to solve an error it created.
 - Mistral: Good, until we get Jinja Exceptions.
+
+Winners so far:
+
+Model: Qwen 3.5 27b (UD IQ3 version for larger context)
+Agent: pi
