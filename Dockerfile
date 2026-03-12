@@ -25,14 +25,14 @@ RUN npx -y playwright install
 RUN curl https://mise.run | sh
 ENV PATH="/home/user/.local/bin:$PATH"
 RUN echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
-RUN mise use opencode && mise use npm:@mariozechner/pi-coding-agent
+RUN mise use opencode && mise use bun && mise use npm:@mariozechner/pi-coding-agent
 RUN ln -s `which fdfind` /home/user/.local/bin/fd
 RUN pnpm self-update
 
 COPY ./user /home/user
 
 USER root
-RUN chown -R user:user /home/user/.config /home/user/.pi /home/user/.gitconfig
+RUN chown -R user:user /home/user/.config /home/user/.pi /home/user/.gitconfig /home/user/.tmux.conf
 RUN chmod a+x /home/user/docker-scripts/start.sh /home/user/docker-scripts/setup.sh
 USER user
 

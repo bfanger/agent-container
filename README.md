@@ -16,7 +16,7 @@ Open http://localhost:4096/ for OpenCode.
 ## Pi.dev
 
 ```sh
-docker compose exec dev zsh
+docker compose exec dev tmux -2
 ```
 
 ```sh

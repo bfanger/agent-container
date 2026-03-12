@@ -1,0 +1,8 @@
+{
+  "name": "get-console-messages",
+  "private": true,
+  "main": "skills/browser/scripts/get-console-messages.ts",
+  "dependencies": {
+    "playwright": "^1.58.2"
+  }
+}
