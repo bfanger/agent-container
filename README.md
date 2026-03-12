@@ -24,10 +24,10 @@ cd projects/your-project
 pi
 ```
 
-### Running Qwen3.5 model with llama.cpp
+### Running Qwen3.5 model with llama.cpp (on 16GB VRAM)
 
 ```sh
- .\llama-server.exe -m D:\ai-models\unsloth\Qwen3.5-27B-GGUF\Qwen3.5-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off -c 40000 --no-mmap --metrics
+.\llama-server.exe -m D:\ai-models\unsloth\Qwen3.5-27B-GGUF\Qwen3.5-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 -c 42000
 ```
 
 For opencode also add `--jinja`

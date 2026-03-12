@@ -9,6 +9,7 @@ RUN apt update && apt upgrade -y && apt install -y \
   ffmpeg \
   fd-find \
   ripgrep \
+  tmux \
   && npm -gf install npm \
   && npx playwright install --with-deps \
   && pnpm self-update \

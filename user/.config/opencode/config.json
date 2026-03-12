@@ -11,7 +11,7 @@
         "unsloth/Qwen3.5-27B-GGUF": {
           "name": "Qwen3.5 27B",
           "limit": {
-            "context": 40000,
+            "context": 42000,
             "output": 32000
           }
         },
