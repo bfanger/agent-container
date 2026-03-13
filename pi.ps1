@@ -1,5 +1,11 @@
 #!/usr/bin/env pwsh
 
+param(
+    [Parameter(Mandatory=$false, Position=0)]
+    [string]$project
+)
+
+
 $llamaServerPath = "C:\Users\bfang\Projects\llama\llama-server.exe"
 $agentContainerPath = "C:\Users\bfang\Projects\opencode"
 
@@ -27,5 +33,9 @@ if (!$process) {
 }
 
 Set-Location $agentContainerPath
-docker compose exec dev tmux -2
+if ($project) {
+    docker compose exec --workdir "/home/user/projects/$project" dev tmux -2
+} else {
+    docker compose exec dev tmux -2
+}
 
