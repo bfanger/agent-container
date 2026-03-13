@@ -2,7 +2,7 @@
 
 ## Installation
 
-Install [LM Studio](https://lmstudio.ai/) & enable the dev server or run [llama.cpp]()
+Install [LM Studio](https://lmstudio.ai/) & enable the dev server or run [llama.cpp](https://github.com/ggml-org/llama.cpp)
 
 ```sh
 docker compose up --build -d
@@ -27,7 +27,7 @@ pi
 ### Running Qwen3.5 model with llama.cpp (on 16GB VRAM)
 
 ```sh
-.\llama-server.exe -m D:\ai-models\unsloth\Qwen3.5-27B-GGUF\Qwen3.5-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 -c 42000
+.\llama-server.exe -m D:\ai-models\unsloth\Qwen3.5-27B-GGUF\Qwen3.5-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 -c 64000
 ```
 
 For opencode also add `--jinja`
@@ -68,7 +68,7 @@ Start llama.cpp with:
 .\llama-server --fim-qwen-1.5b-default --no-mmap --n-gpu-layers -1 --parallel 1 -c 1024
 ```
 
-This takes up VRAM so decrease the context of the chat (agent?) model to `-c 8000`
+This takes up VRAM so decrease the context of the chat/agent model to `-c 10000`
 
 ## Learnings
 
