@@ -5,7 +5,6 @@ param(
     [string]$project
 )
 
-
 $llamaServerPath = "C:\Users\bfang\Projects\llama\llama-server.exe"
 $agentContainerPath = "C:\Users\bfang\Projects\opencode"
 
@@ -33,9 +32,38 @@ if (!$process) {
 }
 
 Set-Location $agentContainerPath
+docker compose up -d
 if ($project) {
-    docker compose exec --workdir "/home/user/projects/$project" dev tmux -2
+    
+    $volumeName = $project + "_modules"
+    $volumeName = $volumeName -replace "-", "_"
+    $filename = "docker-compose.override.yml"
+    if (-not (Test-Path -Path $filename)) {
+        @"
+volumes:
+  $($volumeName):
+services:
+  dev:
+    volumes:
+     - $($volumeName):/user/projects/$($project)/node_modules
+"@ | Set-Content -Path $filename
+    } else {
+    $content = Get-Content -Path $filename
+    $exists = $content -match "^  $($volumeName):"
+    
+    if (-not $exists) {
+        $content = $content -replace "^services:", @"
+  $($volumeName):
+services:
+"@
+        $content += "     - $($volumeName):/user/projects/$($project)/node_modules`n"
+    }
+    $content | Set-Content -Path $filename
+    }
+    docker compose up -d
+    docker compose exec --user root dev "/user/docker-scripts/setup.sh" 
+    docker compose exec --workdir "/user/projects/$project" dev tmux
 } else {
-    docker compose exec dev tmux -2
+    docker compose exec dev tmux
 }
 

@@ -6,7 +6,7 @@ Install [LM Studio](https://lmstudio.ai/) & enable the dev server or run [llama.
 
 ```sh
 docker compose up --build -d
-docker compose exec --user root dev /home/user/docker-scripts/setup.sh
+docker compose exec --user root dev /user/docker-scripts/setup.sh
 ```
 
 ### OpenCode

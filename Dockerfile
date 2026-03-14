@@ -1,39 +1,42 @@
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:latest
 
-RUN apt update && apt upgrade -y && apt install -y \
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+ENV TZ=Europe/Amsterdam
+
+RUN useradd --home /user --create-home --shell /usr/bin/zsh user
+RUN apt update && apt upgrade -y && apt install -y --no-install-recommends \
   zsh \
-  neovim \
+  btop \
   xdg-utils \
-  firefox-esr \
-  chromium \
-  ffmpeg \
   fd-find \
   ripgrep \
   tmux \
   && npm -gf install npm \
-  && npx playwright install --with-deps \
+  && npx playwright install --with-deps && mv /root/.cache /user/.cache && chown -R user:user /user/.cache \
   && pnpm self-update \
-  && apt clean && rm -rf /var/cache/apt/archives /var/lib/apt/lists  /root/.cache/ms-playwright/
-
-RUN useradd --create-home --shell /usr/bin/zsh user
+  && apt clean -y && rm -rf /var/cache/apt/archives /var/lib/apt/lists
 
 USER user
-WORKDIR /home/user
-RUN curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
-RUN npx -y playwright install
-
-RUN curl https://mise.run | sh
-ENV PATH="/home/user/.local/bin:$PATH"
-RUN echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
-RUN mise use opencode && mise use bun && mise use npm:@mariozechner/pi-coding-agent
-RUN ln -s `which fdfind` /home/user/.local/bin/fd
+WORKDIR /user
 RUN pnpm self-update
 
-COPY ./user /home/user
+# zsh
+RUN curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
+RUN echo "source ~/.config/.zshrc" >>  ~/.zshrc
+# tmux
+RUN mkdir -p ~/.config/tmux/plugins/catppuccin && git clone https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
+# mise
+RUN curl https://mise.run | sh
+ENV PATH="/user/.local/bin:$PATH"
+RUN mise use opencode bun neovim npm:@mariozechner/pi-coding-agent
+RUN ln -s `which fdfind` /user/.local/bin/fd
 
+# copy config files & update permissions
+COPY ./user /user
 USER root
-RUN chown -R user:user /home/user/.config /home/user/.pi /home/user/.gitconfig /home/user/.tmux.conf
-RUN chmod a+x /home/user/docker-scripts/start.sh /home/user/docker-scripts/setup.sh
+RUN chown -R user:user /user/.config /user/.pi /user/.gitconfig /user/.tmux.conf
+RUN chmod a+x /user/docker-scripts/start.sh /user/docker-scripts/setup.sh
 USER user
 
-CMD ["/home/user/docker-scripts/start.sh"]
+CMD ["/user/docker-scripts/start.sh"]
