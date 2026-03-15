@@ -34,10 +34,10 @@ if (!$process) {
 Set-Location $agentContainerPath
 docker compose up -d
 if ($project) {
-    
     $volumeName = $project + "_modules"
     $volumeName = $volumeName -replace "-", "_"
     $filename = "docker-compose.override.yml"
+
     if (-not (Test-Path -Path $filename)) {
         @"
 volumes:
@@ -45,24 +45,27 @@ volumes:
 services:
   dev:
     volumes:
-     - $($volumeName):/user/projects/$($project)/node_modules
+      - $($volumeName):/user/projects/$($project)/node_modules
 "@ | Set-Content -Path $filename
     } else {
-    $content = Get-Content -Path $filename
-    $exists = $content -match "^  $($volumeName):"
-    
-    if (-not $exists) {
-        $content = $content -replace "^services:", @"
+        $content = Get-Content -Path $filename
+        $exists = $content -match "^  $($volumeName):"
+        
+        if (-not $exists) {
+            $content = $content -replace "^volumes:", @"
+volumes:
   $($volumeName):
-services:
 "@
-        $content += "     - $($volumeName):/user/projects/$($project)/node_modules`n"
-    }
-    $content | Set-Content -Path $filename
+            $content = $content -replace "^    volumes:", @"
+    volumes:
+      - $($volumeName):/user/projects/$($project)/node_modules
+"@
+            $content | Set-Content -Path $filename
+        }
     }
     docker compose up -d
     docker compose exec --user root dev "/user/docker-scripts/setup.sh" 
-    docker compose exec --workdir "/user/projects/$project" dev tmux
+    docker compose exec --workdir "/user/projects/$project" dev tmux new-session -t $project
 } else {
     docker compose exec dev tmux
 }
