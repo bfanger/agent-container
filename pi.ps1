@@ -35,7 +35,7 @@ Set-Location $agentContainerPath
 docker compose up -d
 if ($project) {
     $volumeName = $project + "_modules"
-    $volumeName = $volumeName -replace "-", "_"
+    $volumeName = $volumeName -replace "[-.]", "_"
     $filename = "docker-compose.override.yml"
 
     if (-not (Test-Path -Path $filename)) {
@@ -64,7 +64,7 @@ volumes:
         }
     }
     docker compose up -d
-    docker compose exec --user root dev "/user/docker-scripts/setup.sh" 
+    docker compose exec --user root dev "/user/docker-scripts/permissions.sh" 
     docker compose exec --workdir "/user/projects/$project" dev tmux new-session -t $project
 } else {
     docker compose exec dev tmux

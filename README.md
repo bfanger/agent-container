@@ -6,7 +6,7 @@ Install [LM Studio](https://lmstudio.ai/) & enable the dev server or run [llama.
 
 ```sh
 docker compose up --build -d
-docker compose exec --user root dev /user/docker-scripts/setup.sh
+docker compose exec --user root dev /user/docker-scripts/permissions.sh
 ```
 
 ### OpenCode
@@ -24,17 +24,29 @@ cd projects/your-project
 pi
 ```
 
-### Running Qwen3.5 model with llama.cpp (on 16GB VRAM)
+## Running models with llama.cpp (on 16GB VRAM)
 
-```sh
+### Qwen3.5 27b
+
+```pwsh
 .\llama-server.exe -m D:\ai-models\unsloth\Qwen3.5-27B-GGUF\Qwen3.5-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 -c 64000
 ```
-
-For opencode also add `--jinja`
 
 To enable vision add: `--mmproj D:\ai-models\unsloth\Qwen3.5-27B-GGUF\mmproj-F32.gguf` but also decrease the context to `-c 10000`
 
 And update ~/.pi/agent/models.json to `"input": ["text", "image"],`
+
+### Qwen3.5 32b A3B (faster)
+
+```pwsh
+ .\llama-server.exe -m D:\ai-models\unsloth\Qwen3.5-35B-A3B-GGUF\Qwen3.5-35B-A3B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 -c 60000
+```
+
+### GLM 4.7 Flash
+
+```pwsh
+.\llama-server.exe -m D:\ai-models\unsloth\GLM-4.7-Flash-GGUF\GLM-4.7-Flash-UD-IQ3_XXS.gguf --temp 0.6 --top-p 1.0 --min-p 0.01 --repeat-penalty 1.0 --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 -c 50000
+```
 
 ## For autocomplete in VSCode
 
