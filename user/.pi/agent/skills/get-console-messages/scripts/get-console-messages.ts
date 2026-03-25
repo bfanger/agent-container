@@ -15,8 +15,7 @@ if (!url) {
 }
 
 try {
-  new URL(url);
-  const messages = await browse(url);
+  const messages = await browse(new URL(url));
   console.log(JSON.stringify(messages, null, 2));
 } catch (error) {
   console.error(
@@ -29,9 +28,11 @@ try {
   process.exit(1);
 }
 
-async function browse(url: string): Promise<ConsoleMessage[]> {
+async function browse(url: URL): Promise<ConsoleMessage[]> {
   const browser = await chromium.launch({ headless: true });
-  const page = await browser.newPage();
+  const page = await browser.newPage({
+    ignoreHTTPSErrors: url.hostname === "localhost",
+  });
 
   const messages: ConsoleMessage[] = [];
 
@@ -51,7 +52,7 @@ async function browse(url: string): Promise<ConsoleMessage[]> {
   });
 
   try {
-    await page.goto(url);
+    await page.goto(url.toString());
     await page.waitForLoadState("networkidle");
   } finally {
     await browser.close();

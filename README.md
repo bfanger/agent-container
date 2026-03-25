@@ -36,13 +36,13 @@ To enable vision add: `--mmproj D:\ai-models\unsloth\Qwen3.5-27B-GGUF\mmproj-F32
 
 And update ~/.pi/agent/models.json to `"input": ["text", "image"],`
 
-### Qwen3.5 32b A3B (faster)
+### Qwen3.5 32b A3B (fast)
 
 ```pwsh
  .\llama-server.exe -m D:\ai-models\unsloth\Qwen3.5-35B-A3B-GGUF\Qwen3.5-35B-A3B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 -c 60000
 ```
 
-### GLM 4.7 Flash
+### GLM 4.7 Flash 30b A3B (fast)
 
 ```pwsh
 .\llama-server.exe -m D:\ai-models\unsloth\GLM-4.7-Flash-GGUF\GLM-4.7-Flash-UD-IQ3_XXS.gguf --temp 0.6 --top-p 1.0 --min-p 0.01 --repeat-penalty 1.0 --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 -c 50000

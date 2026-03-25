@@ -36,8 +36,6 @@ RUN curl https://mise.run | sh
 ENV PATH="/user/.local/bin:$PATH"
 RUN mise use opencode bun neovim npm:@mariozechner/pi-coding-agent
 RUN ln -s `which fdfind` /user/.local/bin/fd
-RUN git clone https://github.com/LazyVim/starter ~/.config/nvim && rm -rf ~/.config/nvim/.git
-RUN mise exec neovim -- nvim --headless "+Lazy! sync" +q! && echo "vim.opt.relativenumber = false" >> ~/.config/nvim/lua/config/options.lua
 
 # copy config files & update permissions
 COPY ./user /user
@@ -46,6 +44,5 @@ RUN chown -R user:user /user/.config /user/.pi /user/.gitconfig /user/.tmux.conf
 RUN chmod a+x /user/docker-scripts/start.sh /user/docker-scripts/permissions.sh /user/docker-scripts/install.sh
 USER user
 RUN /user/docker-scripts/install.sh
-
 
 CMD ["/user/docker-scripts/start.sh"]
