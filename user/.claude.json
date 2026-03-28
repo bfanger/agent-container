@@ -1,0 +1,7 @@
+{
+  "hasCompletedOnboarding": true,
+  "customApiKeyResponses": {
+    "approved": ["sk-not-a-real-key"],
+    "rejected": []
+  }
+}

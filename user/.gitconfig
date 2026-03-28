@@ -3,3 +3,6 @@
 
 [alias]
    st = status
+
+[safe]
+  directory = /user/projects/*

@@ -4,6 +4,8 @@ ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
 ENV TZ=Europe/Amsterdam
 ENV PNPM_STORE_DIR=/user/.pnpm-store
+ENV ANTHROPIC_BASE_URL=http://host.docker.internal:8080
+ENV ANTHROPIC_API_KEY=sk-not-a-real-key 
 
 RUN useradd --home /user --create-home --shell /usr/bin/zsh user
 RUN apt update && apt upgrade -y && apt install -y --no-install-recommends \
@@ -16,6 +18,7 @@ RUN apt update && apt upgrade -y && apt install -y --no-install-recommends \
   ffmpeg \
   nmap dnsutils \
   tree-sitter-cli \
+  golang \
   composer php8.4-curl php8.4-dom php8.4-mysql php8.4-gd php8.4-opcache php8.4-sqlite3 php8.4-xdebug php8.4-apcu \
   && npm -gf install npm \
   && npx playwright install --with-deps && mv /root/.cache /user/.cache && chown -R user:user /user/.cache \
@@ -30,11 +33,11 @@ RUN pnpm self-update
 RUN curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 RUN echo "source ~/.config/.zshrc" >>  ~/.zshrc
 # tmux
-RUN mkdir -p ~/.config/tmux/plugins/catppuccin && git clone https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
+RUN mkdir -p ~/.config/tmux/plugins/catppuccin && git clone https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux && go install github.com/arl/gitmux@latest
 # mise
 RUN curl https://mise.run | sh
-ENV PATH="/user/.local/bin:$PATH"
-RUN mise use opencode bun neovim npm:@mariozechner/pi-coding-agent
+ENV PATH="/user/.local/bin:$PATH:/user/go/bin"
+RUN mise use opencode claude-code bun neovim npm:@mariozechner/pi-coding-agent
 RUN ln -s `which fdfind` /user/.local/bin/fd
 
 # copy config files & update permissions
