@@ -3,6 +3,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:latest
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
 ENV TZ=Europe/Amsterdam
+ENV TERM=xterm-256color
 ENV PNPM_STORE_DIR=/user/.pnpm-store
 ENV ANTHROPIC_BASE_URL=http://host.docker.internal:8080
 ENV ANTHROPIC_API_KEY=sk-not-a-real-key 
@@ -34,16 +35,18 @@ RUN curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/in
 RUN echo "source ~/.config/.zshrc" >>  ~/.zshrc
 # tmux
 RUN mkdir -p ~/.config/tmux/plugins/catppuccin && git clone https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux && go install github.com/arl/gitmux@latest
+# Claude code
+RUN curl -fsSL https://claude.ai/install.sh | bash
 # mise
 RUN curl https://mise.run | sh
 ENV PATH="/user/.local/bin:$PATH:/user/go/bin"
-RUN mise use opencode claude-code bun neovim npm:@mariozechner/pi-coding-agent
+RUN mise use opencode bun neovim npm:@mariozechner/pi-coding-agent
 RUN ln -s `which fdfind` /user/.local/bin/fd
 
 # copy config files & update permissions
 COPY ./user /user
 USER root
-RUN chown -R user:user /user/.config /user/.pi /user/.gitconfig /user/.tmux.conf
+RUN chown -R user:user /user/.config /user/.pi /user/.gitconfig /user/.*.conf /user/.claude.json 
 RUN chmod a+x /user/docker-scripts/start.sh /user/docker-scripts/permissions.sh /user/docker-scripts/install.sh
 USER user
 RUN /user/docker-scripts/install.sh
