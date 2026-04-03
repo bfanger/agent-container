@@ -36,7 +36,7 @@ RUN curl -fsSL https://vite.plus | VP_NODE_MANAGER=no bash
 RUN mkdir -p ~/.config/tmux/plugins/catppuccin && git clone https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux && go install github.com/arl/gitmux@latest
 # mise
 RUN curl https://mise.run | sh
-ENV PATH="/user/.local/bin:$PATH:/user/go/bin;/user/.vite-plus/env"
+ENV PATH="/user/.local/bin:$PATH:/user/go/bin:/user/.vite-plus/env"
 
 RUN mise use opencode bun neovim
 RUN ln -s `which fdfind` /user/.local/bin/fd

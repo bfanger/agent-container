@@ -7,19 +7,14 @@ npm install -g -f npm@latest
 npm install -g \
   pnpm@latest \
   @mariozechner/pi-coding-agent@latest \
-  agent-browser@latest \
-  typescript-language-server@latest \
-  typescript@latest \
-  svelte-language-server \
-  @vue/language-server
-
+  agent-browser@latest
+  
 agent-browser install
 
 curl -fsSL https://claude.ai/install.sh | bash
 
 # Install pi-agent dependencies
 pi install npm:pi-agent-browser
-pi install npm:lsp-pi
 echo "Installing skill dependencies" 
 SKILLS_DIR="$HOME/.pi/agent/skills"
 for skill in "$SKILLS_DIR"/*/; do
