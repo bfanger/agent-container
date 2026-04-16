@@ -8,7 +8,7 @@
         {
           "id": "unsloth/Qwen3.5-27B-GGUF",
           "name": "Qwen3.5 27B",
-          "contextWindow": 64000
+          "contextWindow": 50000
         },
         {
           "id": "default",

@@ -26,9 +26,26 @@ if (!$process) {
         "--flash-attn", "on",
         "--cache-type-v", "q8_0",
         "--cache-type-k", "q8_0",
-        "-c", "64000"
+        "--cache-ram", "4096",
+        "-c", "50000"
     )
     Start-Process $llamaServerPath -ArgumentList $args -NoNewWindow -RedirectStandardError "NUL"
+}
+
+function WaitForDocker {
+    docker info *> $null
+    if ($LASTEXITCODE -ne 0) {
+        return $true
+    }
+    return $false
+}
+
+if (WaitForDocker -eq $true) {
+    Write-Host "Starting Docker..."
+    Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+    while (WaitForDocker -eq $true) {
+        Start-Sleep -Seconds 1
+    }
 }
 
 Set-Location $agentContainerPath
