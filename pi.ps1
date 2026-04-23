@@ -12,7 +12,7 @@ $process = Get-Process -Name "llama-server" -ErrorAction SilentlyContinue
 
 if (!$process) {
     $args = @(
-        "-m", "D:\ai-models\unsloth\Qwen3.5-27B-GGUF\Qwen3.5-27B-UD-IQ3_XXS.gguf",
+        "-m", "D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf",
         "--temp", "0.6",
         "--top-p", "0.95",
         "--top-k", "20",

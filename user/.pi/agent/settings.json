@@ -3,5 +3,5 @@
     "blockImages": true
   },
   "defaultProvider": "llama-cpp",
-  "defaultModel": "unsloth/Qwen3.5-27B-GGUF"
+  "defaultModel": "Qwen3.6-27B-UD-IQ3_XXS.gguf"
 }
