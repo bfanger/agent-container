@@ -4,7 +4,6 @@ ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
 ENV TZ=Europe/Amsterdam
 ENV COLORTERM=truecolor
-ENV PNPM_STORE_DIR=/user/.pnpm-store
 ENV ANTHROPIC_BASE_URL=http://host.docker.internal:8080
 ENV ANTHROPIC_API_KEY=sk-not-a-real-key 
 

@@ -1,5 +1,6 @@
 volumes:
-  pnpmstore:
+  pnpmstore_user:
+  pnpmstore_projects:
 services:
   dev:
     hostname: dev
@@ -8,7 +9,8 @@ services:
       context: .
     volumes:
       - ./projects:/user/projects
-      - pnpmstore:/user/.pnpm-store
+      - pnpmstore_user:/user/.pnpm-store
+      - pnpmstore_projects:/user/projects/.pnpm-store
     ports:
       - 5173:5173
       - 4096:4096
