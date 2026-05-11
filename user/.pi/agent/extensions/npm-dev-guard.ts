@@ -2,7 +2,7 @@ import {
   ToolCallEvent,
   type BashToolCallEvent,
   type ExtensionAPI,
-} from "@mariozechner/pi-coding-agent";
+} from "@earendil-works/pi-coding-agent";
 
 const patterns = [/\b(npm|pnpm|yarn)\s+run\s+dev\b/, /\b(pnpm|yarn)\s+dev\b/];
 

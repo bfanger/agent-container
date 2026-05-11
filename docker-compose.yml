@@ -4,8 +4,8 @@ services:
   dev:
     hostname: dev
     user: 1001:1001
-    build: 
-      dockerfile: Dockerfile
+    build:
+      context: .
     volumes:
       - ./projects:/user/projects
       - pnpmstore:/user/.pnpm-store

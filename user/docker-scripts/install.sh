@@ -6,7 +6,7 @@ go install golang.org/x/tools/gopls@latest
 npm install -g -f npm@latest
 npm install -g \
   pnpm@latest \
-  @mariozechner/pi-coding-agent@latest \
+  @earendil-works/pi-coding-agent@latest \
   agent-browser@latest
   
 agent-browser install

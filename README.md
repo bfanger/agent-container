@@ -84,7 +84,7 @@ This takes up VRAM so decrease the context of the chat/agent model to `-c 10000`
 
 ## Learnings
 
-- For better performance load everything into vram and check if there no shared vram usage
+- For better performance load everything into vram and check if there is no shared vram usage
 - Large context is important for agentic sessions.
 - Speculative decoding performance increase is small and not worth the vram cost.
 - [pi](https://pi.dev) with its smaller base prompt is a good fit for smaller models
@@ -94,7 +94,7 @@ This takes up VRAM so decrease the context of the chat/agent model to `-c 10000`
 
 - Gemma 12b: had trouble with using the tools and edits
 - GPT-OSS: fast, but likes to rewrite a lot, which can work, get errors when context grows
-- Qwen: The smaller models gets stuck into thinking or are unable to solve errors they created.
+- Qwen: The smaller models get stuck in thinking or are unable to solve errors they created.
 - Mistral: Good, until we get Jinja Exceptions.
 
 Winners so far:
