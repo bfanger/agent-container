@@ -5,4 +5,4 @@
    st = status
 
 [safe]
-  directory = /user/projects/*
+  directory = /app/*

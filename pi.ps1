@@ -5,8 +5,9 @@ param(
     [string]$project
 )
 
-$llamaServerPath = "C:\Users\bfang\Projects\llama\llama-server.exe"
-$agentContainerPath = "C:\Users\bfang\Projects\opencode"
+$projectsPath = "C:\Users\bfang\Projects"
+$llamaServerPath = $projectsPath + "\llama\llama-server.exe"
+$agentContainerPath = $projectsPath + "\agent-container"
 
 $process = Get-Process -Name "llama-server" -ErrorAction SilentlyContinue
 
