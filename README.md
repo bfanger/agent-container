@@ -2,25 +2,17 @@
 
 ## Installation
 
-Install [LM Studio](https://lmstudio.ai/) & enable the dev server or run [llama.cpp](https://github.com/ggml-org/llama.cpp)
+Install [LM Studio](https://lmstudio.ai/) & enable the dev server on 8080 or run [llama.cpp](https://github.com/ggml-org/llama.cpp)
 
 ```sh
-docker compose up --build -d
-docker compose exec --user root dev /user/docker-scripts/permissions.sh
+docker build --tag agent .
 ```
 
-### OpenCode
-
-Open http://localhost:4096/ for OpenCode.
-
-## Pi.dev
+## Running
 
 ```sh
-docker compose exec dev tmux -2
-```
-
-```sh
-cd projects/your-project
+docker run --rm -it agent tmux
+# Start your agent: pi or claude or opencode
 pi
 ```
 

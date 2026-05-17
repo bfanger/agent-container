@@ -1,7 +1,7 @@
 FROM fedora:44
 
 ENV ANTHROPIC_BASE_URL=http://host.docker.internal:8080
-ENV ANTHROPIC_API_KEY=sk-not-a-real-key 
+ENV ANTHROPIC_API_KEY=sk-not-a-real-key
 ENV TZ=Europe/Amsterdam
 ENV PATH="/home/assistant/.local/bin:$PATH:/home/assistant/go/bin:/home/assistant/.vite-plus/env:/home/assistant/.local/share/pnpm/bin"
 ENV LANG=en_US.UTF-8
@@ -21,7 +21,10 @@ RUN dnf update -y && dnf install -y \
   nodejs24 \
   neovim \
   golang \
-  chromium
+  chromium \
+  jq \
+  nmap \
+  bind-utils
 
 USER assistant
 WORKDIR /home/assistant
@@ -29,14 +32,13 @@ WORKDIR /home/assistant
 # Oh My Zsh
 RUN curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 RUN echo "source ~/.config/.zshrc" >>  ~/.zshrc
-
 # Vite Plus
 RUN curl -fsSL https://vite.plus | VP_NODE_MANAGER=no bash
-# tmux
+# Tmux
 RUN mkdir -p ~/.config/tmux/plugins/catppuccin && git clone https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux && go install github.com/arl/gitmux@latest
 # Claude Code
 RUN curl -fsSL https://claude.ai/install.sh | bash
-# Playwright browsers
+# Preinstall Playwright browsers
 RUN npx -y playwright install
 
 USER root
@@ -51,20 +53,14 @@ RUN chown -R assistant:assistant \
 RUN chmod a+x /home/assistant/docker-scripts/permissions.sh /home/assistant/docker-scripts/install.sh
 USER assistant
 
-RUN npm install -g pnpm
+RUN npm install -g pnpm yarn
 # LazyVim
 RUN nvim --headless "+Lazy! sync" "+sleep 10" +q! 
-# Pi Agent, OpenCode & Agent Browser
-RUN pnpm add -g \
-  yarn \
-  @earendil-works/pi-coding-agent \
-  opencode-ai \
-  agent-browser
-  
-RUN agent-browser install
-RUN pi install npm:pi-agent-browser
-RUN /home/assistant/docker-scripts/install.sh
+# Agent Browser
+RUN npm install -g agent-browser && agent-browser install
+# Pi Agent
+RUN npm install -g @earendil-works/pi-coding-agent && pi install npm:pi-agent-browser && /home/assistant/docker-scripts/install.sh
+# OpenCode
+RUN npm install -g opencode-ai
 
-
-
-CMD ["/usr/bin/sleep", "infinity"]
+CMD ["/usr/sbin/tmux"]

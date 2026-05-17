@@ -7,7 +7,6 @@ param(
 
 $projectsPath = "C:\Users\bfang\Projects"
 $llamaServerPath = $projectsPath + "\llama\llama-server.exe"
-$agentContainerPath = $projectsPath + "\agent-container"
 
 $process = Get-Process -Name "llama-server" -ErrorAction SilentlyContinue
 
@@ -49,42 +48,36 @@ if (WaitForDocker -eq $true) {
     }
 }
 
-Set-Location $agentContainerPath
-docker compose up -d
 if ($project) {
-    $volumeName = $project + "_modules"
-    $volumeName = $volumeName -replace "[-.]", "_"
-    $filename = "docker-compose.override.yml"
-
-    if (-not (Test-Path -Path $filename)) {
-        @"
-volumes:
-  $($volumeName):
-services:
-  dev:
-    volumes:
-      - $($volumeName):/user/projects/$($project)/node_modules
-"@ | Set-Content -Path $filename
-    } else {
-        $content = Get-Content -Path $filename
-        $exists = $content -match "^  $($volumeName):"
-        
-        if (-not $exists) {
-            $content = $content -replace "^volumes:", @"
-volumes:
-  $($volumeName):
-"@
-            $content = $content -replace "^    volumes:", @"
-    volumes:
-      - $($volumeName):/user/projects/$($project)/node_modules
-"@
-            $content | Set-Content -Path $filename
-        }
-    }
-    docker compose up -d
-    docker compose exec --user root dev "/user/docker-scripts/permissions.sh" 
-    docker compose exec --workdir "/user/projects/$project" dev tmux new-session -t $project
+    $projectPath = $projectsPath + "\" + $project 
 } else {
-    docker compose exec dev tmux
-}
+    $project = Split-Path -Leaf $PWD
+    $projectPath = $PWD
+} 
+$volume = $project -replace "[-.]", "_"
+# Prepare volume
+$args = @(
+    "run",
+    "--rm",
+    "--mount",
+    "src=${volume},destination=/mnt",
+    "--workdir", "/mnt"
+    "alpine",
+    "sh", "-c", "mkdir -p node_modules .pnpm-store && chown 1000:1000 /mnt/node_modules .pnpm-store"
+)
+docker @args
+
+# Start docker container
+$args = @(
+    "run"
+    "--rm", 
+    "-it",
+    "--volume", "$projectPath\:/app/$project",
+    "--mount", "type=volume,src=$volume,volume-subpath=node_modules,destination=/app/$project/node_modules"
+    "--mount", "src=$volume,volume-subpath=.pnpm-store,destination=/app/$project/.pnpm-store"
+    "--workdir", "/app/$project",
+    "agent", 
+    "tmux"
+)
+docker @args
 
