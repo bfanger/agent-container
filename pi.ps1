@@ -76,6 +76,7 @@ $args = @(
     "--mount", "type=volume,src=$volume,volume-subpath=node_modules,destination=/app/$project/node_modules"
     "--mount", "src=$volume,volume-subpath=.pnpm-store,destination=/app/$project/.pnpm-store"
     "--workdir", "/app/$project",
+    "--env", "ANTHROPIC_API_KEY=sk-not-a-real-key"
     "agent", 
     "tmux"
 )

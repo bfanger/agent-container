@@ -1,7 +1,6 @@
 FROM fedora:44
 
 ENV ANTHROPIC_BASE_URL=http://host.docker.internal:8080
-ENV ANTHROPIC_API_KEY=sk-not-a-real-key
 ENV TZ=Europe/Amsterdam
 ENV PATH="/home/assistant/.local/bin:$PATH:/home/assistant/go/bin:/home/assistant/.vite-plus/env:/home/assistant/.local/share/pnpm/bin"
 ENV LANG=en_US.UTF-8
