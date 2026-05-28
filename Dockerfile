@@ -20,10 +20,11 @@ RUN dnf update -y && dnf install -y \
   nodejs24 \
   neovim \
   golang \
-  chromium \
+  chromium firefox libavif libmanette libsecret harfbuzz-icu libwayland-server hyphen enchant2 \
   jq \
   nmap \
-  bind-utils
+  bind-utils \
+  procps-ng 
 
 USER assistant
 WORKDIR /home/assistant
@@ -49,16 +50,15 @@ RUN chown -R assistant:assistant \
   /home/assistant/.gitconfig \
   /home/assistant/.*.conf \
   /home/assistant/.claude.json
-RUN chmod a+x /home/assistant/docker-scripts/permissions.sh /home/assistant/docker-scripts/install.sh
 USER assistant
 
 RUN npm install -g pnpm yarn
 # LazyVim
-RUN nvim --headless "+Lazy! sync" "+sleep 10" +q! 
-# Agent Browser
-RUN npm install -g agent-browser && agent-browser install
+RUN nvim --headless "+Lazy! sync" "+sleep 10" +q!
 # Pi Agent
-RUN npm install -g @earendil-works/pi-coding-agent && pi install npm:pi-agent-browser && /home/assistant/docker-scripts/install.sh
+RUN npm install -g @earendil-works/pi-coding-agent && pnpm --dir /home/assistant/.pi/agent/skills/get-console-messages install
+# Agent Browser
+RUN npm install -g agent-browser && agent-browser install && pi install npm:pi-agent-browser
 # OpenCode
 RUN npm install -g opencode-ai
 
