@@ -5,6 +5,7 @@ ENV TZ=Europe/Amsterdam
 ENV PATH="/home/assistant/.local/bin:$PATH:/home/assistant/go/bin:/home/assistant/.vite-plus/env:/home/assistant/.local/share/pnpm/bin"
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
+ENV MOZ_HEADLESS=1
 
 RUN useradd --home /home/assistant --create-home --shell /usr/bin/zsh assistant
 
@@ -24,7 +25,8 @@ RUN dnf update -y && dnf install -y \
   jq \
   nmap \
   bind-utils \
-  procps-ng 
+  procps-ng \
+  zip
 
 USER assistant
 WORKDIR /home/assistant
