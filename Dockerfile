@@ -56,7 +56,7 @@ USER assistant
 
 RUN npm install -g pnpm yarn
 # LazyVim
-RUN nvim --headless "+Lazy! sync" "+sleep 10" +q!
+RUN /home/assistant/.config/nvim/neovim-docker-postinstall.sh
 # Pi Agent
 RUN npm install -g @earendil-works/pi-coding-agent && pnpm --dir /home/assistant/.pi/agent/skills/get-console-messages install
 # Agent Browser
