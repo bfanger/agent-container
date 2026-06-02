@@ -2,7 +2,9 @@
 
 param(
     [Parameter(Mandatory=$false, Position=0)]
-    [string]$project
+    [string]$project,
+    [Parameter(Mandatory=$false)]
+    [switch]$dry
 )
 
 $projectsPath = "C:\Users\bfang\Projects"
@@ -32,6 +34,7 @@ if (!$process) {
     Start-Process $llamaServerPath -ArgumentList $args -NoNewWindow -RedirectStandardError "NUL"
 }
 
+
 function WaitForDocker {
     docker info *> $null
     if ($LASTEXITCODE -ne 0) {
@@ -48,37 +51,73 @@ if (WaitForDocker -eq $true) {
     }
 }
 
+function Get-MountPaths {
+    param([string]$subpath)
+    $mountPaths = @()
+    if (Test-Path "$subpath\pnpm-lock.yaml") {
+        $mountPaths += ".pnpm-store"
+    }
+    if (Test-Path "$subpath\package.json") {
+        $mountPaths += "node_modules"
+    }
+    $subDirs = Get-ChildItem -Path $subpath -Directory -Recurse -Force -ErrorAction SilentlyContinue
+    foreach ($dir in $subDirs) {
+        $parts = $dir.FullName.Replace($subpath, '').Split('\')
+        $skip = $false
+        foreach ($part in $parts) {
+            if ($part -eq 'node_modules' -or $part.StartsWith('.') -or $part.StartsWith('_')) {
+                $skip = $true
+                break
+            }
+        }
+        if ($skip) { continue }
+        if (Test-Path "$($dir.FullName)\package.json") {
+            $relativePath = $dir.FullName.Replace($subpath, '').TrimStart('\').Replace('\', '/')
+            $mountPaths += "$relativePath/node_modules"
+        }
+    }
+    return $mountPaths
+}
+
 if ($project) {
     $projectPath = $projectsPath + "\" + $project 
 } else {
     $project = Split-Path -Leaf $PWD
     $projectPath = $PWD
-} 
+}
+
 $volume = $project -replace "[-.]", "_"
-# Prepare volume
-$args = @(
+$mountPaths = Get-MountPaths -subpath $projectPath
+$prepareArgs = @(
     "run",
     "--rm",
     "--mount",
     "src=${volume},destination=/mnt",
     "--workdir", "/mnt"
     "alpine",
-    "sh", "-c", "mkdir -p node_modules .pnpm-store && chown 1000:1000 /mnt/node_modules .pnpm-store"
+    "sh", "-c", "mkdir -p $($mountPaths -join ' ') && chown 1000:1000 $($mountPaths -join ' ')"
 )
-docker @args
 
-# Start docker container
-$args = @(
-    "run"
+$runArgs = @(
+    "run",
     "--rm", 
     "-it",
     "--volume", "$projectPath\:/app/$project",
-    "--mount", "type=volume,src=$volume,volume-subpath=node_modules,destination=/app/$project/node_modules"
-    "--mount", "src=$volume,volume-subpath=.pnpm-store,destination=/app/$project/.pnpm-store"
     "--workdir", "/app/$project",
     "--env", "ANTHROPIC_API_KEY=sk-not-a-real-key"
-    "agent", 
-    "tmux"
 )
-docker @args
+foreach ($path in $mountPaths) {
+    $runArgs += "--mount"
+    $runArgs += "type=volume,src=$volume,volume-subpath=$path,destination=/app/$project/$path"
+}
+$runArgs += "agent"
+$runArgs += "tmux"
 
+if ($dry) {
+    $runArgs | Write-Host
+} else {
+    if ($mountPaths.Count -gt 0) {
+        docker @prepareArgs
+    }
+    docker @runArgs
+}
