@@ -9,6 +9,7 @@ param(
 
 $projectsPath = "C:\Users\bfang\Projects"
 $llamaServerPath = $projectsPath + "\llama\llama-server.exe"
+$pnpm = $false
 
 $process = Get-Process -Name "llama-server" -ErrorAction SilentlyContinue
 
@@ -54,24 +55,28 @@ if (WaitForDocker -eq $true) {
 function Get-MountPaths {
     param([string]$subpath)
     $mountPaths = @()
-    if (Test-Path "$subpath\pnpm-lock.yaml") {
-        $mountPaths += ".pnpm-store"
-    }
     if (Test-Path "$subpath\package.json") {
         $mountPaths += "node_modules"
+        if (Test-Path "$subpath\pnpm-lock.yaml") {
+            $script:pnpm = $true
+        }
     }
+    $blacklist = @('node_modules', 'out', 'dist', 'build')
     $subDirs = Get-ChildItem -Path $subpath -Directory -Recurse -Force -ErrorAction SilentlyContinue
     foreach ($dir in $subDirs) {
         $parts = $dir.FullName.Replace($subpath, '').Split('\')
         $skip = $false
         foreach ($part in $parts) {
-            if ($part -eq 'node_modules' -or $part.StartsWith('.') -or $part.StartsWith('_')) {
+            if ($part -in $blacklist -or $part.StartsWith('.') -or $part.StartsWith('_')) {
                 $skip = $true
                 break
             }
         }
         if ($skip) { continue }
         if (Test-Path "$($dir.FullName)\package.json") {
+            if (Test-Path "$($dir.FullName)\pnpm-lock.yaml") {
+                $script:pnpm = $true
+            }
             $relativePath = $dir.FullName.Replace($subpath, '').TrimStart('\').Replace('\', '/')
             $mountPaths += "$relativePath/node_modules"
         }
@@ -88,6 +93,10 @@ if ($project) {
 
 $volume = $project -replace "[-.]", "_"
 $mountPaths = Get-MountPaths -subpath $projectPath
+if ($pnpm) {
+    $mountPaths += ".pnpm-store"
+}
+
 $prepareArgs = @(
     "run",
     "--rm",
