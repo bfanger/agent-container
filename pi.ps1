@@ -92,7 +92,8 @@ if ($project) {
 }
 
 $volume = $project -replace "[-.]", "_"
-$mountPaths = Get-MountPaths -subpath $projectPath
+$subdomain = $project -replace "[.]", "-"
+$mountPaths = @(Get-MountPaths -subpath $projectPath)
 if ($pnpm) {
     $mountPaths += ".pnpm-store"
 }
@@ -109,11 +110,15 @@ $prepareArgs = @(
 
 $runArgs = @(
     "run",
-    "--rm", 
+    "--rm",
     "-it",
+    "-P",
     "--volume", "$projectPath\:/app/$project",
     "--workdir", "/app/$project",
-    "--env", "ANTHROPIC_API_KEY=sk-not-a-real-key"
+    "--env", "ANTHROPIC_API_KEY=sk-not-a-real-key",
+    "--label", "traefik.http.routers.${subdomain}.rule=Host(`"${subdomain}.localhost`")",
+    "--label", "traefik.http.routers.${subdomain}.service=${subdomain}",
+    "--label", "traefik.http.services.${subdomain}.loadbalancer.server.port=5173"
 )
 foreach ($path in $mountPaths) {
     $runArgs += "--mount"

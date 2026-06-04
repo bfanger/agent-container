@@ -6,6 +6,7 @@ ENV PATH="/home/assistant/.local/bin:$PATH:/home/assistant/go/bin:/home/assistan
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
 ENV MOZ_HEADLESS=1
+ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN useradd --home /home/assistant --create-home --shell /usr/bin/zsh assistant
 
@@ -17,6 +18,7 @@ RUN dnf update -y && dnf install -y \
   langpacks-en \
   tmux \
   ImageMagick \
+  pngquant \
   ffmpeg \
   nodejs24 \
   neovim \
@@ -63,5 +65,7 @@ RUN npm install -g @earendil-works/pi-coding-agent && pnpm --dir /home/assistant
 RUN npm install -g agent-browser && agent-browser install && pi install npm:pi-agent-browser
 # OpenCode
 RUN npm install -g opencode-ai
+
+EXPOSE 5173
 
 CMD ["/usr/sbin/tmux"]

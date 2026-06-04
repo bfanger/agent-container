@@ -1,0 +1,5 @@
+providers:
+  docker: {}
+api:
+  dashboard: true
+  insecure: true
