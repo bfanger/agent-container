@@ -5,7 +5,7 @@
 Install [LM Studio](https://lmstudio.ai/) & enable the dev server on 8080 or run [llama.cpp](https://github.com/ggml-org/llama.cpp)
 
 ```sh
-docker build --tag agent .
+docker build --tag agent --no-cache .
 ```
 
 ## Running
