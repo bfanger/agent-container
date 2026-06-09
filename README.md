@@ -6,15 +6,34 @@ Install [LM Studio](https://lmstudio.ai/) & enable the dev server on 8080 or run
 
 ```sh
 docker build --tag agent --no-cache .
+go install ./cmd/agent
 ```
 
-## Running
+## Running using Docker
 
 ```sh
 docker run --rm -it agent tmux
-# Start your agent: pi or claude or opencode
+# Inside the container start your agent: pi, claude or opencode
 pi
 ```
+
+## Running using the agent cli
+
+It creates the docker container and relevant volumes for pnpm.
+
+```sh
+agent
+```
+
+Create an pi alias in your powershell $PROFILE, example:
+
+```sh
+function pi {
+    & 'C:\Users\bfang\go\bin\agent.exe' --docker-desktop --model 'D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf' --llama 'C:\Users\bfang\Projects\llama\llama-server.exe' @args
+}
+```
+
+This also starts docker & llama-server if they are not yet running.
 
 ## Running models with llama.cpp (on 16GB VRAM)
 

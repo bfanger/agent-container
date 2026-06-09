@@ -1,10 +1,3 @@
-/**
- * Linux/Mac: go build -o bin/agent cli/main.go
- * Windows: go build -o bin/agent.exe cli/main.go
- *
- * To your .zshrc add:
- *   alias pi=/Users/bob/Sites/agent-container/bin/agent
- */
 package main
 
 import (
@@ -15,12 +8,28 @@ import (
 	"os/exec"
 	"path/filepath"
 	"regexp"
+	"runtime"
 	"strings"
+	"time"
 )
 
 func main() {
 	dry := flag.Bool("dry", false, "print docker command without running")
+	dockerDesktop := new(false)
+	if runtime.GOOS == "windows" {
+		dockerDesktop = flag.Bool("docker-desktop", false, "Autostart Docker Desktop")
+	}
+	model := flag.String("model", "", "Autostart llama-server using this model")
+	llama := flag.String("llama", "llama-server", "path to llama-server.exe")
 	flag.Parse()
+
+	if *dockerDesktop && !isDockerRunning() {
+		startDockerDesktop()
+	}
+
+	if *model != "" && !isLlamaRunning() {
+		startLlamaServer(*llama, *model)
+	}
 
 	projectPath, err := os.Getwd()
 	if err != nil {
@@ -138,5 +147,58 @@ func runDocker(args ...string) {
 	if err := cmd.Wait(); err != nil {
 		fmt.Fprintf(os.Stderr, "Docker command failed: %v\n", err)
 		os.Exit(cmd.ProcessState.ExitCode())
+	}
+}
+
+func startLlamaServer(llama, model string) {
+	args := []string{
+		"-m", model,
+		"--temp", "0.6",
+		"--top-p", "0.95",
+		"--top-k", "20",
+		"--min-p", "0.0",
+		"--presence-penalty", "0.0",
+		"--repeat-penalty", "1.0",
+		"--fit", "off",
+		"--no-mmap",
+		"--n-gpu-layers", "-1",
+		"--parallel", "1",
+		"--flash-attn", "on",
+		"--cache-type-v", "q8_0",
+		"--cache-type-k", "q8_0",
+		"--cache-ram", "4096",
+		"-c", "50000",
+	}
+	var cmd *exec.Cmd
+	cmd = exec.Command(llama, args...)
+	if err := cmd.Start(); err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to start llama-server: %v\n", err)
+		os.Exit(1)
+	}
+}
+
+func isLlamaRunning() bool {
+	if runtime.GOOS == "windows" {
+		cmd := exec.Command("powershell", "-Command", "Get-Process -Name llama-server -ErrorAction Stop")
+		return cmd.Run() == nil
+	}
+	cmd := exec.Command("pgrep", "-f", "llama-server")
+	return cmd.Run() == nil
+}
+
+func isDockerRunning() bool {
+	cmd := exec.Command("docker", "info")
+	return cmd.Run() == nil
+}
+
+func startDockerDesktop() {
+	cmd := exec.Command("powershell", "-Command", "Start-Process 'C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe'")
+	if err := cmd.Run(); err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to start Docker Desktop: %v\n", err)
+		os.Exit(1)
+	}
+
+	for !isDockerRunning() {
+		time.Sleep(1 * time.Second)
 	}
 }
