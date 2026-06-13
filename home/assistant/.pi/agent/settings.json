@@ -2,6 +2,6 @@
   "images": {
     "blockImages": true
   },
-  "defaultProvider": "llama-cpp",
-  "defaultModel": "Qwen3.6-27B-UD-IQ3_XXS.gguf"
+  "defaultProvider": "llama-swap",
+  "defaultModel": "Qwen3.6-27B-Fast"
 }

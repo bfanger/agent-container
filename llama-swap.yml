@@ -1,0 +1,27 @@
+models:
+  Qwen3.6-27B-Fast:
+    name: Qwen3.6 27B Fast (MTP 40K)
+    description: MTP for faster speed at the cost of context length
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} -m D:\ai-models\unsloth\Qwen3.6-27B-MTP-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 -c 40000 --spec-type draft-mtp --spec-draft-n-max 2
+    aliases:
+      - claude-opus-4-8
+  Qwen3.6-27B-Balanced:
+    name: Qwen3.6 27B (50K)
+    description: Balance between speed, context and VRAM available for other programs
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} -m D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 -c 50000
+  Qwen3.6-27B-Turbo:
+    name: Qwen3.6 27B Turbo (MTP 50K)
+    description: VRAM dedicated for LLM, nothing left for other programs
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} -m D:\ai-models\unsloth\Qwen3.6-27B-MTP-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 --spec-type draft-mtp --spec-draft-n-max 2 -c 50000
+  Qwen3.6-27B-Vision:
+    name: Qwen3.6 27B Vision
+    description: Vision enabled
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} -m D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 --mmproj D:\ai-models\unsloth\Qwen3.6-27B-GGUF\mmproj-F32.gguf -c 10000
+  Qwen3.6-27B-Mini:
+    name: Qwen3.6 27B Mini (16K)
+    description: Small context, but ~2.5GB VRAM available for other programs
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} -m D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 -c 16000
+  Qwen3.6-27B-Max:
+    name: Qwen3.6 27B Max (68K)
+    description: Max context
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} -m D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 -c 68000

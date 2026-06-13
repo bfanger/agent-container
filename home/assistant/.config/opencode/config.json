@@ -1,22 +1,55 @@
 {
-  "$schema": "https://opencode.ai/config.json",
+  "$schema": "https://opencode.acpi/config.json",
+  "model": "llama-swap/Qwen3.6-27B-Fast",
   "provider": {
-    "llama.cpp": {
+    "llama-swap": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "llama-server (local)",
+      "name": "llama-swap",
       "options": {
         "baseURL": "http://host.docker.internal:8080/v1"
       },
       "models": {
-        "Qwen3.6-27B-UD-IQ3_XXS.gguf": {
-          "name": "Qwen 3.6 27B",
+        "Qwen3.6-27B-Fast": {
+          "name": "Qwen3.6 27B Fast (MTP 40K)",
+          "limit": {
+            "context": 40000,
+            "output": 32000
+          }
+        },
+        "Qwen3.6-27B-Turbo": {
+          "name": "Qwen3.6 27B Turbo (MTP 50K)",
           "limit": {
             "context": 50000,
             "output": 32000
           }
         },
-        "unknown": {
-          "name": "Unknown model"
+        "Qwen3.6-27B-Vision": {
+          "name": "Qwen3.6 27B Vision",
+          "limit": {
+            "context": 10000,
+            "output": 32000
+          }
+        },
+        "Qwen3.6-27B-Balanced": {
+          "name": "Qwen3.6 27B (50K)",
+          "limit": {
+            "context": 50000,
+            "output": 32000
+          }
+        },
+        "Qwen3.6-27B-Mini": {
+          "name": "Qwen3.6 27B Mini (16K)",
+          "limit": {
+            "context": 16000,
+            "output": 32000
+          }
+        },
+        "Qwen3.6-27B-Max": {
+          "name": "Qwen3.6 27B Max (68K)",
+          "limit": {
+            "context": 68000,
+            "output": 32000
+          }
         }
       }
     }

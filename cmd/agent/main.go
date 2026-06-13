@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"io/fs"
+	"net/http"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -20,16 +21,15 @@ func main() {
 	if runtime.GOOS == "windows" {
 		dockerDesktop = flag.Bool("docker-desktop", false, "Autostart Docker Desktop")
 	}
-	model := flag.String("model", "", "Autostart llama-server using this model")
-	llama := flag.String("llama", "llama-server", "path to llama-server.exe")
+	config := flag.String("llama-swap", "", "Autostart llama-swap using this config")
 	flag.Parse()
 
 	wg := sync.WaitGroup{}
 	defer wg.Wait()
 
-	if *model != "" && !isLlamaRunning() {
-		fmt.Println("Starting llama-server...")
-		wg.Go(func() { startLlamaServer(*llama, *model) })
+	if *config != "" && !isOpenApiV1Available() {
+		fmt.Println("Starting llama-swap...")
+		wg.Go(func() { startLlamaSwap(*config) })
 	}
 
 	if *dockerDesktop && !isDockerRunning() {
@@ -41,6 +41,13 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	homeDir, err := os.UserHomeDir()
+	if err == nil && projectPath == homeDir {
+		fmt.Fprintln(os.Stderr, "Error: not inside a project")
+		os.Exit(1)
+	}
+
 	projectSlug := filepath.Base(projectPath)
 
 	mountPaths, usesPnpm := getMountPaths(projectPath)
@@ -156,40 +163,21 @@ func runDocker(args ...string) {
 	}
 }
 
-func startLlamaServer(llama, model string) {
-	args := []string{
-		"-m", model,
-		"--temp", "0.6",
-		"--top-p", "0.95",
-		"--top-k", "20",
-		"--min-p", "0.0",
-		"--presence-penalty", "0.0",
-		"--repeat-penalty", "1.0",
-		"--fit", "off",
-		"--no-mmap",
-		"--n-gpu-layers", "-1",
-		"--parallel", "1",
-		"--flash-attn", "on",
-		"--cache-type-v", "q8_0",
-		"--cache-type-k", "q8_0",
-		"--cache-ram", "4096",
-		"-c", "50000",
-	}
-	var cmd *exec.Cmd
-	cmd = exec.Command(llama, args...)
+func startLlamaSwap(config string) {
+	cmd := exec.Command("llama-swap", "-watch-config", "-config", config)
 	if err := cmd.Start(); err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to start llama-server: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Failed to start llama-swap: %v\n", err)
 		os.Exit(1)
 	}
 }
 
-func isLlamaRunning() bool {
-	if runtime.GOOS == "windows" {
-		cmd := exec.Command("powershell", "-Command", "Get-Process -Name llama-server -ErrorAction Stop")
-		return cmd.Run() == nil
+func isOpenApiV1Available() bool {
+	resp, err := http.Get("http://localhost:8080/v1/models")
+	if err != nil {
+		return false
 	}
-	cmd := exec.Command("pgrep", "-f", "llama-server")
-	return cmd.Run() == nil
+	resp.Body.Close()
+	return resp.StatusCode == 200
 }
 
 func isDockerRunning() bool {

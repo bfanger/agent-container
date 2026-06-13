@@ -1,34 +1,39 @@
 {
   "providers": {
-    "llama-cpp": {
+    "llama-swap": {
       "baseUrl": "http://host.docker.internal:8080/v1",
       "api": "openai-completions",
       "apiKey": "none",
       "models": [
         {
-          "id": "Qwen3.6-27B-UD-IQ3_XXS.gguf",
-          "name": "Qwen 3.6",
-          "contextWindow": 50000
-        },
-        {
-          "id": "Qwen3.6-27B-MTP-GGUF",
-          "name": "Qwen 3.6 MTP",
+          "id": "Qwen3.6-27B-Fast",
+          "name": "Qwen3.6 27B Fast (MTP 40K)",
           "contextWindow": 40000
         },
         {
-          "id": "default",
-          "name": "Default Model"
-        }
-      ]
-    },
-    "lm-studio": {
-      "baseUrl": "http://host.docker.internal:1234/v1",
-      "api": "openai-completions",
-      "apiKey": "none",
-      "models": [
+          "id": "Qwen3.6-27B-Turbo",
+          "name": "Qwen3.6 27B Turbo (MTP 50K)",
+          "contextWindow": 50000
+        },
         {
-          "id": "default",
-          "name": "Default Model"
+          "id": "Qwen3.6-27B-Vision",
+          "name": "Qwen3.6 27B Vision",
+          "contextWindow": 10000
+        },
+        {
+          "id": "Qwen3.6-27B-Balanced",
+          "name": "Qwen3.6 27B (50K)",
+          "contextWindow": 50000
+        },
+        {
+          "id": "Qwen3.6-27B-Mini",
+          "name": "Qwen3.6 27B Mini (16K)",
+          "contextWindow": 16000
+        },
+        {
+          "id": "Qwen3.6-27B-Max",
+          "name": "Qwen3.6 27B Max (68K)",
+          "contextWindow": 68000
         }
       ]
     }
