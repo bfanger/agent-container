@@ -27,8 +27,9 @@ RUN dnf update -y && dnf install -y \
   jq \
   nmap \
   bind-utils \
-  procps-ng \
-  zip
+  procps-ng psmisc \
+  zip \
+  atop btop
 
 USER assistant
 WORKDIR /home/assistant

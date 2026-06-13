@@ -10,6 +10,7 @@ import (
 	"regexp"
 	"runtime"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -23,12 +24,17 @@ func main() {
 	llama := flag.String("llama", "llama-server", "path to llama-server.exe")
 	flag.Parse()
 
-	if *dockerDesktop && !isDockerRunning() {
-		startDockerDesktop()
-	}
+	wg := sync.WaitGroup{}
+	defer wg.Wait()
 
 	if *model != "" && !isLlamaRunning() {
-		startLlamaServer(*llama, *model)
+		fmt.Println("Starting llama-server...")
+		wg.Go(func() { startLlamaServer(*llama, *model) })
+	}
+
+	if *dockerDesktop && !isDockerRunning() {
+		fmt.Println("Starting Docker Desktop...")
+		startDockerDesktop()
 	}
 
 	projectPath, err := os.Getwd()

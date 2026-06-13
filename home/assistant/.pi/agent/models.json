@@ -11,6 +11,11 @@
           "contextWindow": 50000
         },
         {
+          "id": "Qwen3.6-27B-MTP-GGUF",
+          "name": "Qwen 3.6 MTP",
+          "contextWindow": 40000
+        },
+        {
           "id": "default",
           "name": "Default Model"
         }

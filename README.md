@@ -37,7 +37,15 @@ This also starts docker & llama-server if they are not yet running.
 
 ## Running models with llama.cpp (on 16GB VRAM)
 
-### Qwen3.6 27b
+### Qwen3.6 27b MTP - 40K context - ~70tps
+
+```pwsh
+./llama-server.exe -m D:\ai-models\unsloth\Qwen3.6-27B-MTP-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 -c 40000 --host 0.0.0.0 --spec-type draft-mtp --spec-draft-n-max 2
+```
+
+MTP increases speed at to cost of VRAM (context).
+
+### Qwen3.6 27b - 50K context - ~40tps
 
 ```pwsh
 .\llama-server.exe -m D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 -c 50000
