@@ -29,7 +29,7 @@ Create an pi alias in your powershell $PROFILE, example:
 
 ```sh
 function pi {
-    & 'C:\Users\bfang\go\bin\agent.exe' --docker-desktop --model 'D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf' --llama 'C:\Users\bfang\Projects\llama\llama-server.exe' @args
+    & 'C:\Users\bfang\go\bin\agent.exe' --docker-desktop --llama-swap 'C:\Users\bfang\Projects\agent-container\llama-swap.yml' @args
 }
 ```
 

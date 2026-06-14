@@ -21,6 +21,10 @@ func main() {
 	if runtime.GOOS == "windows" {
 		dockerDesktop = flag.Bool("docker-desktop", false, "Autostart Docker Desktop")
 	}
+	orbstack := new(false)
+	if runtime.GOOS == "darwin" {
+		orbstack = flag.Bool("orbstack", false, "Autostart OrbStack")
+	}
 	config := flag.String("llama-swap", "", "Autostart llama-swap using this config")
 	flag.Parse()
 
@@ -35,6 +39,11 @@ func main() {
 	if *dockerDesktop && !isDockerRunning() {
 		fmt.Println("Starting Docker Desktop...")
 		startDockerDesktop()
+	}
+
+	if *orbstack && !isDockerRunning() {
+		fmt.Println("Starting OrbStack...")
+		startOrbStack()
 	}
 
 	projectPath, err := os.Getwd()
@@ -189,6 +198,18 @@ func startDockerDesktop() {
 	cmd := exec.Command("powershell", "-Command", "Start-Process 'C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe'")
 	if err := cmd.Run(); err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to start Docker Desktop: %v\n", err)
+		os.Exit(1)
+	}
+
+	for !isDockerRunning() {
+		time.Sleep(1 * time.Second)
+	}
+}
+
+func startOrbStack() {
+	cmd := exec.Command("open", "/Applications/OrbStack.app")
+	if err := cmd.Run(); err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to start OrbStack: %v\n", err)
 		os.Exit(1)
 	}
 
