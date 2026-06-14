@@ -3,7 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
 	"io/fs"
+	"net"
 	"net/http"
 	"os"
 	"os/exec"
@@ -26,10 +28,16 @@ func main() {
 		orbstack = flag.Bool("orbstack", false, "Autostart OrbStack")
 	}
 	config := flag.String("llama-swap", "", "Autostart llama-swap using this config")
+	proxy := flag.String("proxy", "", "Autostart proxy on 8080 to [host]:[port]")
 	flag.Parse()
 
 	wg := sync.WaitGroup{}
 	defer wg.Wait()
+
+	if *proxy != "" && !isOpenApiV1Available() {
+		fmt.Printf("Starting HTTP proxy :8080 to %s\n", *proxy)
+		go proxyServer(*proxy)
+	}
 
 	if *config != "" && !isOpenApiV1Available() {
 		fmt.Println("Starting llama-swap...")
@@ -169,6 +177,34 @@ func runDocker(args ...string) {
 	if err := cmd.Wait(); err != nil {
 		fmt.Fprintf(os.Stderr, "Docker command failed: %v\n", err)
 		os.Exit(cmd.ProcessState.ExitCode())
+	}
+}
+
+// proxy server, but no error handling, as that would pollute the tty docker session.
+func proxyServer(target string) {
+	proxy, err := net.Listen("tcp", ":8080")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "failed to start proxy: %v\n", err)
+		os.Exit(1)
+	}
+	for {
+		conn, err := proxy.Accept()
+		if err != nil {
+			panic(err)
+		}
+		go func(client net.Conn) {
+			defer client.Close()
+			dialer := net.Dialer{Timeout: 10 * time.Second}
+			server, err := dialer.Dial("tcp", target)
+			if err != nil {
+				return
+			}
+			defer server.Close()
+			go func() {
+				_, _ = io.Copy(server, client)
+			}()
+			_, _ = io.Copy(client, server)
+		}(conn)
 	}
 }
 
