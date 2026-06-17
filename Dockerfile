@@ -35,6 +35,8 @@ RUN dnf update -y && dnf install -y \
 USER assistant
 WORKDIR /home/assistant
 
+# Mise (to allow agents to install runtimes not part of this container)
+RUN curl https://mise.run | sh
 # Oh My Zsh
 RUN curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 RUN echo "source ~/.config/.zshrc" >>  ~/.zshrc
@@ -46,6 +48,7 @@ RUN mkdir -p ~/.config/tmux/plugins/catppuccin && git clone https://github.com/c
 RUN curl -fsSL https://claude.ai/install.sh | bash
 # Preinstall Playwright browsers
 RUN npx -y playwright install
+
 
 USER root
 COPY ./home/assistant /home/assistant
