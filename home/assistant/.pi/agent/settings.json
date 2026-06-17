@@ -3,5 +3,6 @@
     "blockImages": true
   },
   "defaultProvider": "llama-swap",
-  "defaultModel": "Qwen3.6-27B-Fast"
+  "defaultModel": "Qwen3.6-27B-Fast",
+  "defaultProjectTrust": "always"
 }

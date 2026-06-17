@@ -29,7 +29,8 @@ RUN dnf update -y && dnf install -y \
   bind-utils \
   procps-ng psmisc \
   zip \
-  atop btop
+  atop btop \
+  poppler-utils
 
 USER assistant
 WORKDIR /home/assistant
