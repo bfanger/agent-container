@@ -1,5 +1,5 @@
 {
-  "$schema": "https://opencode.acpi/config.json",
+  "$schema": "https://opencode.ai/config.json",
   "model": "llama-swap/Qwen3.6-27B-Fast",
   "provider": {
     "llama-swap": {
@@ -13,6 +13,7 @@
           "name": "Qwen3.6 27B Fast (MTP 40K)",
           "limit": {
             "context": 40000,
+            "input": 40000,
             "output": 32000
           }
         },
@@ -20,6 +21,7 @@
           "name": "Qwen3.6 27B Turbo (MTP 50K)",
           "limit": {
             "context": 50000,
+            "input": 50000,
             "output": 32000
           }
         },
@@ -27,6 +29,7 @@
           "name": "Qwen3.6 27B Vision",
           "limit": {
             "context": 10000,
+            "input": 10000,
             "output": 32000
           }
         },
@@ -34,6 +37,7 @@
           "name": "Qwen3.6 27B (50K)",
           "limit": {
             "context": 50000,
+            "input": 50000,
             "output": 32000
           }
         },
@@ -41,6 +45,7 @@
           "name": "Qwen3.6 27B Mini (16K)",
           "limit": {
             "context": 16000,
+            "input": 16000,
             "output": 32000
           }
         },
@@ -48,6 +53,7 @@
           "name": "Qwen3.6 27B Max (68K)",
           "limit": {
             "context": 68000,
+            "input": 68000,
             "output": 32000
           }
         }
