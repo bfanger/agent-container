@@ -92,6 +92,7 @@ func main() {
 		"--rm",
 		"-it",
 		"-P",
+		"--user", "1000:1000",
 		fmt.Sprintf("--volume=%s:/app/%s", projectPath, projectSlug),
 		"--workdir", fmt.Sprintf("/app/%s", projectSlug),
 		"--env", "ANTHROPIC_API_KEY=sk-not-a-real-key",
