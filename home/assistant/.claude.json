@@ -3,5 +3,11 @@
   "customApiKeyResponses": {
     "approved": ["sk-not-a-real-key"],
     "rejected": []
+  },
+  "projects": {
+    "/app": {
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 1
+    }
   }
 }

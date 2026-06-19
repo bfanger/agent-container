@@ -39,6 +39,7 @@ WORKDIR /home/assistant
 RUN curl https://mise.run | sh
 # Oh My Zsh
 RUN curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
+RUN git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions && sed -i "s/plugins=(git)/plugins=(git zsh-autosuggestions)/g" ~/.zshrc
 RUN echo "source ~/.config/.zshrc" >>  ~/.zshrc
 # Vite Plus
 RUN curl -fsSL https://vite.plus | VP_NODE_MANAGER=no bash
@@ -57,8 +58,9 @@ RUN chown -R assistant:assistant \
   /home/assistant/.config \
   /home/assistant/.pi \
   /home/assistant/.gitconfig \
+  /home/assistant/.zsh_history \
   /home/assistant/.*.conf \
-  /home/assistant/.claude.json
+  /home/assistant/.claude*
 USER assistant
 
 RUN npm install -g pnpm yarn
