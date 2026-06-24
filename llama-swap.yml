@@ -1,3 +1,4 @@
+globalTTL: 600
 models:
   Qwen3.6-27B-Fast:
     name: Qwen3.6 27B Fast (MTP 40K)

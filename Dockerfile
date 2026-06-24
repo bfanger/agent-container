@@ -30,7 +30,9 @@ RUN dnf update -y && dnf install -y \
   procps-ng psmisc \
   zip \
   atop btop \
-  poppler-utils
+  poppler-utils \
+  plocate \
+  php php-cli php-fpm php-mysqlnd php-pdo php-gd php-xml php-mbstring php-json composer
 
 USER assistant
 WORKDIR /home/assistant
@@ -73,6 +75,9 @@ RUN npm install -g agent-browser && pi install npm:pi-agent-browser && if [ "$(u
 # OpenCode
 RUN npm install -g opencode-ai
 
+EXPOSE 80
+EXPOSE 3000
 EXPOSE 5173
+EXPOSE 8000
 
 CMD ["/usr/sbin/tmux"]

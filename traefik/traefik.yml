@@ -3,3 +3,12 @@ providers:
 api:
   dashboard: true
   insecure: true
+
+entryPoints:
+  web:
+    address: ":80"
+    asDefault: true
+  laravel:
+    address: ":8000"
+  next:
+    address: ":3000"

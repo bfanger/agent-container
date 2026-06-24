@@ -4,11 +4,14 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
+      - "3000:3000"
+      - "8000:8000"
       
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik.yml:/etc/traefik/traefik.yml:ro
     labels:
       - traefik.http.routers.traefik.rule=Host("traefik.localhost")
+      - traefik.http.routers.traefik.entrypoints=web
       - traefik.http.routers.traefik.service=traefik
       - traefik.http.services.traefik.loadbalancer.server.port=8080

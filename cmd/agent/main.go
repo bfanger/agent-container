@@ -96,9 +96,20 @@ func main() {
 		fmt.Sprintf("--volume=%s:/app/%s", projectPath, projectSlug),
 		"--workdir", fmt.Sprintf("/app/%s", projectSlug),
 		"--env", "ANTHROPIC_API_KEY=sk-not-a-real-key",
+
 		fmt.Sprintf("--label=traefik.http.routers.%s.rule=Host(`%s.localhost`)", subdomain, subdomain),
 		fmt.Sprintf("--label=traefik.http.routers.%s.service=%s", subdomain, subdomain),
 		fmt.Sprintf("--label=traefik.http.services.%s.loadbalancer.server.port=5173", subdomain),
+
+		fmt.Sprintf("--label=traefik.http.routers.%s-next.rule=Host(`%s.localhost`)", subdomain, subdomain),
+		fmt.Sprintf("--label=traefik.http.routers.%s-next.entrypoints=next", subdomain),
+		fmt.Sprintf("--label=traefik.http.routers.%s-next.service=%s-next", subdomain, subdomain),
+		fmt.Sprintf("--label=traefik.http.services.%s-next.loadbalancer.server.port=5173", subdomain),
+
+		fmt.Sprintf("--label=traefik.http.routers.%s-laravel.rule=Host(`%s.localhost`)", subdomain, subdomain),
+		fmt.Sprintf("--label=traefik.http.routers.%s-laravel.entrypoints=laravel", subdomain),
+		fmt.Sprintf("--label=traefik.http.routers.%s-laravel.service=%s-laravel", subdomain, subdomain),
+		fmt.Sprintf("--label=traefik.http.services.%s-laravel.loadbalancer.server.port=8000", subdomain),
 	}
 
 	for _, path := range mountPaths {
@@ -128,8 +139,13 @@ func getMountPaths(subpath string) ([]string, bool) {
 		}
 	}
 
+	if _, err := os.Stat(filepath.Join(subpath, "composer.json")); err == nil {
+		mountPaths = append(mountPaths, "vendor")
+	}
+
 	blacklist := map[string]bool{
 		"node_modules": true,
+		"vendor":       true,
 		"out":          true,
 		"dist":         true,
 		"build":        true,
