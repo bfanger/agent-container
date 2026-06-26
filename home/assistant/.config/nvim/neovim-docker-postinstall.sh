@@ -17,6 +17,8 @@ Waiting for plugins and language servers to install.
 EOF
 
 tmux new-session -d -s lazyvim "nvim /tmp/vim-post-install.md"
+sleep 1
+tmux send-keys -t lazyvim :MasonInstall pint phpstan Enter
 
 last_messages_seen=$(date +%s%3N)
 

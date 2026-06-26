@@ -34,6 +34,8 @@ RUN dnf update -y && dnf install -y \
   plocate \
   php php-cli php-fpm php-mysqlnd php-pdo php-gd php-xml php-mbstring php-json composer
 
+RUN npm install -g pnpm yarn
+
 USER assistant
 WORKDIR /home/assistant
 
@@ -41,7 +43,9 @@ WORKDIR /home/assistant
 RUN curl https://mise.run | sh
 # Oh My Zsh
 RUN curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
-RUN git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions && sed -i "s/plugins=(git)/plugins=(git zsh-autosuggestions)/g" ~/.zshrc
+RUN git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+RUN git clone https://github.com/jessarcher/zsh-artisan.git ~/.oh-my-zsh/custom/plugins/artisan
+RUN sed -i "s/plugins=(git)/plugins=(git yarn zsh-autosuggestions composer artisan)/g" ~/.zshrc
 RUN echo "source ~/.config/.zshrc" >>  ~/.zshrc
 # Vite Plus
 RUN curl -fsSL https://vite.plus | VP_NODE_MANAGER=no bash
@@ -55,7 +59,6 @@ RUN npx -y playwright install
 
 USER root
 COPY ./home/assistant /home/assistant
-RUN dnf update -y && dnf autoremove
 RUN chown -R assistant:assistant \
   /home/assistant/.config \
   /home/assistant/.pi \
@@ -65,7 +68,6 @@ RUN chown -R assistant:assistant \
   /home/assistant/.claude*
 USER assistant
 
-RUN npm install -g pnpm yarn
 # LazyVim
 RUN /home/assistant/.config/nvim/neovim-docker-postinstall.sh
 # Pi Agent

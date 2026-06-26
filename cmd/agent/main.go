@@ -104,7 +104,7 @@ func main() {
 		fmt.Sprintf("--label=traefik.http.routers.%s-next.rule=Host(`%s.localhost`)", subdomain, subdomain),
 		fmt.Sprintf("--label=traefik.http.routers.%s-next.entrypoints=next", subdomain),
 		fmt.Sprintf("--label=traefik.http.routers.%s-next.service=%s-next", subdomain, subdomain),
-		fmt.Sprintf("--label=traefik.http.services.%s-next.loadbalancer.server.port=5173", subdomain),
+		fmt.Sprintf("--label=traefik.http.services.%s-next.loadbalancer.server.port=3000", subdomain),
 
 		fmt.Sprintf("--label=traefik.http.routers.%s-laravel.rule=Host(`%s.localhost`)", subdomain, subdomain),
 		fmt.Sprintf("--label=traefik.http.routers.%s-laravel.entrypoints=laravel", subdomain),
