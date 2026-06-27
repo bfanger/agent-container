@@ -71,7 +71,7 @@ USER assistant
 # LazyVim
 RUN /home/assistant/.config/nvim/neovim-docker-postinstall.sh
 # Pi Agent
-RUN npm install -g @earendil-works/pi-coding-agent && pnpm --dir /home/assistant/.pi/agent/skills/get-console-messages install
+RUN npm install -g @earendil-works/pi-coding-agent && pi install npm:pi-mcp-adapter && pnpm --dir /home/assistant/.pi/agent/skills/get-console-messages install
 # Agent Browser
 RUN npm install -g agent-browser && pi install npm:pi-agent-browser && if [ "$(uname -m)" != "aarch64" ]; then agent-browser install; fi
 # OpenCode
