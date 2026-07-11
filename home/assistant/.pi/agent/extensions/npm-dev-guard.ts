@@ -18,7 +18,7 @@ export default function (pi: ExtensionAPI) {
       return {
         block: true,
         reason:
-          "starting the dev server is not needed, it's already running. If it was to verify the project, use `npm run build` instead.",
+          "starting the dev server is not needed, it's probably already running. If it was to verify the project, use `npm run build` instead. If it was to inspect logs from the dev server use commands like `tmux capture-pane -t 2 -p -S -25`",
       };
     }
   });
