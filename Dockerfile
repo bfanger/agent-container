@@ -32,7 +32,8 @@ RUN dnf update -y && dnf install -y \
   atop btop \
   poppler-utils \
   plocate \
-  php php-cli php-fpm php-mysqlnd php-pdo php-gd php-xml php-mbstring php-json composer
+  php php-cli php-fpm php-mysqlnd php-pdo php-gd php-xml php-mbstring php-xdebug php-intl php-redis php-json composer \
+  valkey valkey-compat-redis
 
 RUN npm install -g pnpm yarn
 
