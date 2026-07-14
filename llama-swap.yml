@@ -23,6 +23,23 @@ models:
     description: Small context, but ~2.5GB VRAM available for other programs
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} -m D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 -c 16000
   Qwen3.6-27B-Max:
-    name: Qwen3.6 27B Max (68K)
-    description: Max context
-    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} -m D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 -c 68000
+    name: Qwen3.6 27B Max (115K q4)
+    description: Bigger lower quality context
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} -m D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-k q4_0 --cache-type-v q4_0 -c 115000 --threads 12
+
+  Qwen3.6-35B-A3B-Lightning:
+    name: Qwen3.6 35B A3B Lightning (MTP 50K)
+    description: Incredible speed at the cost of context and intelligence
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} -m D:\ai-models\unsloth\Qwen3.6-35B-A3B-MTP-GGUF\Qwen3.6-35B-A3B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --spec-type draft-mtp --spec-draft-n-max 2 -c 50000
+  Qwen3.6-35B-A3B-Balanced:
+    name: Qwen3.6 35B A3B (110K)
+    description: MoE
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} -m D:\ai-models\unsloth\Qwen3.6-35B-A3B-GGUF\Qwen3.6-35B-A3B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 -c 110000
+  Qwen3.6-35B-A3B-Offload:
+    name: Qwen3.6 35B A3B (262K)
+    description: MoE more context, cpu offload
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} -m D:\ai-models\unsloth\Qwen3.6-35B-A3B-GGUF\Qwen3.6-35B-A3B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 -c 262000 --n-gpu-layers 34 --threads 12
+  Qwen3.6-35B-A3B-Yarn:
+    name: Qwen3.6 35B A3B (1M YaRN q4)
+    description: Maximum context at the cost of speed and quality
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} -m D:\ai-models\unsloth\Qwen3.6-35B-A3B-GGUF\Qwen3.6-35B-A3B-UD-IQ3_XXS.gguf --flash-attn on --ctx-size 1000000 --parallel 1 --cache-type-k q4_0 --cache-type-v q4_0 --yarn-orig-ctx 262144 --rope-scale 4 --override-kv qwen35moe.context_length=int:1000000 --rope-scaling yarn --n-gpu-layers 28 --threads 12

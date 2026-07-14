@@ -17,6 +17,14 @@
             "output": 32000
           }
         },
+        "Qwen3.6-27B-Balanced": {
+          "name": "Qwen3.6 27B (50K)",
+          "limit": {
+            "context": 50000,
+            "input": 50000,
+            "output": 32000
+          }
+        },
         "Qwen3.6-27B-Turbo": {
           "name": "Qwen3.6 27B Turbo (MTP 50K)",
           "limit": {
@@ -33,14 +41,6 @@
             "output": 32000
           }
         },
-        "Qwen3.6-27B-Balanced": {
-          "name": "Qwen3.6 27B (50K)",
-          "limit": {
-            "context": 50000,
-            "input": 50000,
-            "output": 32000
-          }
-        },
         "Qwen3.6-27B-Mini": {
           "name": "Qwen3.6 27B Mini (16K)",
           "limit": {
@@ -50,10 +50,42 @@
           }
         },
         "Qwen3.6-27B-Max": {
-          "name": "Qwen3.6 27B Max (68K)",
+          "name": "Qwen3.6 27B Max (115K q4)",
           "limit": {
-            "context": 68000,
-            "input": 68000,
+            "context": 115000,
+            "input": 115000,
+            "output": 32000
+          }
+        },
+        "Qwen3.6-35B-A3B-Lightning": {
+          "name": "Qwen3.6 35B A3B Lightning (MTP 50K)",
+          "limit": {
+            "context": 50000,
+            "input": 50000,
+            "output": 32000
+          }
+        },
+        "Qwen3.6-35B-A3B-Balanced": {
+          "name": "Qwen3.6 35B A3B (110K)",
+          "limit": {
+            "context": 110000,
+            "input": 110000,
+            "output": 32000
+          }
+        },
+        "Qwen3.6-35B-A3B-Offload": {
+          "name": "Qwen3.6 35B A3B (262K)",
+          "limit": {
+            "context": 262000,
+            "input": 262000,
+            "output": 32000
+          }
+        },
+        "Qwen3.6-35B-A3B-Yarn": {
+          "name": "Qwen3.6 35B A3B (1M YaRN q4)",
+          "limit": {
+            "context": 1000000,
+            "input": 1000000,
             "output": 32000
           }
         }
