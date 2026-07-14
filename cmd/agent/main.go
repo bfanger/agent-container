@@ -143,6 +143,13 @@ func getMountPaths(subpath string) ([]string, bool) {
 		mountPaths = append(mountPaths, "vendor")
 	}
 
+	if _, err := os.Stat(filepath.Join(subpath, "svelte.config.js")); err == nil {
+		svelteConfig, err := os.ReadFile(filepath.Join(subpath, "svelte.config.js"))
+		if err == nil && strings.Contains(string(svelteConfig), "kit:") {
+			mountPaths = append(mountPaths, ".svelte-kit")
+		}
+	}
+
 	blacklist := map[string]bool{
 		"node_modules": true,
 		"vendor":       true,
