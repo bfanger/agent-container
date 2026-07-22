@@ -3,7 +3,7 @@ models:
   Qwen3.6-27B-Fast:
     name: Qwen3.6 27B Fast (MTP 40K)
     description: MTP for faster speed at the cost of context length
-    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} -m D:\ai-models\unsloth\Qwen3.6-27B-MTP-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 -c 40000 --spec-type draft-mtp --spec-draft-n-max 2
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} -m D:\ai-models\unsloth\Qwen3.6-27B-MTP-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --no-mmap --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 --spec-type draft-mtp --spec-draft-n-max 2 -c 40000
     aliases:
       - claude-opus-4-8
   Qwen3.6-27B-Balanced:

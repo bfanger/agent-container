@@ -4,5 +4,10 @@
   },
   "defaultProvider": "llama-swap",
   "defaultModel": "Qwen3.6-27B-Fast",
-  "defaultProjectTrust": "always"
+  "defaultProjectTrust": "always",
+  "compaction": {
+    "enabled": true,
+    "reserveTokens": 8000,
+    "keepRecentTokens": 12000
+  }
 }

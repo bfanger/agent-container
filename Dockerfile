@@ -25,24 +25,29 @@ RUN dnf update -y && dnf install -y \
   golang \
   chromium firefox libavif libmanette libsecret harfbuzz-icu libwayland-server hyphen enchant2 \
   jq \
-  nmap \
+  nmap openssl socat \
   bind-utils \
-  procps-ng psmisc \
+  procps-ng psmisc tree \
   zip \
   atop btop \
   poppler-utils \
   plocate \
   php php-cli php-fpm php-mysqlnd php-pdo php-gd php-xml php-mbstring php-xdebug php-intl php-redis php-json composer \
   valkey valkey-compat-redis \
-  perl-JSON-PP
+  perl-JSON-PP \
+  python3 python3-pip
 
 RUN npm install -g pnpm yarn
 
 USER assistant
 WORKDIR /home/assistant
 
+# uv (to allow agents to setup python envs)
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+
 # Mise (to allow agents to install runtimes not part of this container)
-RUN curl https://mise.run | sh
+RUN curl -Ls https://mise.run | sh
+
 # Oh My Zsh
 RUN curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
@@ -73,7 +78,7 @@ USER assistant
 # LazyVim
 RUN /home/assistant/.config/nvim/neovim-docker-postinstall.sh
 # Pi Agent
-RUN npm install -g @earendil-works/pi-coding-agent && pi install npm:pi-mcp-adapter && pnpm --dir /home/assistant/.pi/agent/skills/get-console-messages install
+RUN npm install -g @earendil-works/pi-coding-agent && pi install npm:pi-mcp-adapter && pi install npm:@heyhuynhgiabuu/pi-task && pnpm --dir /home/assistant/.pi/agent/skills/get-console-messages install
 # Agent Browser
 RUN npm install -g agent-browser && pi install npm:pi-agent-browser && if [ "$(uname -m)" != "aarch64" ]; then agent-browser install; fi
 # OpenCode
