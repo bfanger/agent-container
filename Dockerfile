@@ -83,6 +83,9 @@ RUN npm install -g @earendil-works/pi-coding-agent && pi install npm:pi-mcp-adap
 RUN npm install -g agent-browser && pi install npm:pi-agent-browser && if [ "$(uname -m)" != "aarch64" ]; then agent-browser install; fi
 # OpenCode
 RUN npm install -g opencode-ai
+# little-coder
+ENV LITTLE_CODER_PERMISSION_MODE="accept-all"
+RUN npm install -g little-coder
 
 EXPOSE 80
 EXPOSE 3000

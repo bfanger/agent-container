@@ -9,5 +9,17 @@
     "enabled": true,
     "reserveTokens": 8000,
     "keepRecentTokens": 12000
-  }
+  },
+  "enabledModels": [
+    "llama-swap/Qwen3.6-27B-Fast",
+    "llama-swap/Qwen3.6-27B-Balanced",
+    "llama-swap/Qwen3.6-27B-Turbo",
+    "llama-swap/Qwen3.6-27B-Vision",
+    "llama-swap/Qwen3.6-27B-Mini",
+    "llama-swap/Qwen3.6-27B-Max",
+    "llama-swap/Qwen3.6-35B-A3B-Lightning",
+    "llama-swap/Qwen3.6-35B-A3B-Balanced",
+    "llama-swap/Qwen3.6-35B-A3B-Offload",
+    "llama-swap/Qwen3.6-35B-A3B-Yarn"
+  ]
 }
