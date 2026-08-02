@@ -57,6 +57,22 @@
             "output": 32000
           }
         },
+        "Bonsai-27B": {
+          "name": "Bonsai 27B (140K)",
+          "limit": {
+            "context": 140000,
+            "input": 140000,
+            "output": 32000
+          }
+        },
+        "Bonsai-27B-q8": {
+          "name": "Bonsai 27B (250K q8)",
+          "limit": {
+            "context": 250000,
+            "input": 250000,
+            "output": 32000
+          }
+        },
         "Qwen3.6-35B-A3B-Lightning": {
           "name": "Qwen3.6 35B A3B Lightning (MTP 50K)",
           "limit": {

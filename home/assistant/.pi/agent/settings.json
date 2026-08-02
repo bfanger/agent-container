@@ -17,6 +17,8 @@
     "llama-swap/Qwen3.6-27B-Vision",
     "llama-swap/Qwen3.6-27B-Mini",
     "llama-swap/Qwen3.6-27B-Max",
+    "llama-swap/Bonsai-27B",
+    "llama-swap/Bonsai-27B-q8",
     "llama-swap/Qwen3.6-35B-A3B-Lightning",
     "llama-swap/Qwen3.6-35B-A3B-Balanced",
     "llama-swap/Qwen3.6-35B-A3B-Offload",
