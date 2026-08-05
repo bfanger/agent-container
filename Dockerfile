@@ -41,13 +41,12 @@ RUN npm install -g pnpm yarn
 
 USER assistant
 WORKDIR /home/assistant
+COPY --chown=assistant:assistant ./home/assistant/.npmrc /home/assistant/.npmrc
 
 # uv (to allow agents to setup python envs)
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-
 # Mise (to allow agents to install runtimes not part of this container)
 RUN curl -Ls https://mise.run | sh
-
 # Oh My Zsh
 RUN curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
@@ -56,28 +55,15 @@ RUN sed -i "s/plugins=(git)/plugins=(git yarn zsh-autosuggestions composer artis
 RUN echo "source ~/.config/.zshrc" >>  ~/.zshrc
 # Vite Plus
 RUN curl -fsSL https://vite.plus | VP_NODE_MANAGER=no bash
-# Tmux
-RUN mkdir -p ~/.config/tmux/plugins/catppuccin && git clone https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux && go install github.com/arl/gitmux@latest
 # Claude Code
 RUN curl -fsSL https://claude.ai/install.sh | bash
 # Preinstall Playwright browsers
 RUN npx -y playwright install
-
-
-USER root
-COPY ./home/assistant /home/assistant
-RUN chown -R assistant:assistant \
-  /home/assistant/.config \
-  /home/assistant/.pi \
-  /home/assistant/.gitconfig \
-  /home/assistant/.zsh_history \
-  /home/assistant/.*.conf \
-  /home/assistant/.claude*
-USER assistant
-
 # LazyVim
+COPY --chown=assistant:assistant ./home/assistant/.config/nvim /home/assistant/.config/nvim
 RUN /home/assistant/.config/nvim/neovim-docker-postinstall.sh
 # Pi Agent
+COPY --chown=assistant:assistant ./home/assistant/.pi /home/assistant/.pi
 RUN npm install -g @earendil-works/pi-coding-agent && pi install npm:pi-mcp-adapter && pi install npm:@heyhuynhgiabuu/pi-task && pnpm --dir /home/assistant/.pi/agent/skills/get-console-messages install
 # Agent Browser
 RUN npm install -g agent-browser && pi install npm:pi-agent-browser && if [ "$(uname -m)" != "aarch64" ]; then agent-browser install; fi
@@ -86,10 +72,22 @@ RUN npm install -g opencode-ai
 # little-coder
 ENV LITTLE_CODER_PERMISSION_MODE="accept-all"
 RUN npm install -g little-coder
+# Herdr
+RUN curl -fsSL https://herdr.dev/install.sh | sh
+RUN herdr integration install pi \
+  && herdr integration install opencode \
+  && herdr integration install claude \
+  && herdr plugin install lucasleon2107/herdr-tab-title-sync --yes \
+  && herdr plugin install rohankewal/herdr-nerd-font-tab-name --yes
+
+# Skills
+RUN npx -y skills add herdrdev/herdr --skill herdr -g -y
+
+COPY --chown=assistant:assistant ./home/assistant /home/assistant
 
 EXPOSE 80
 EXPOSE 3000
 EXPOSE 5173
 EXPOSE 8000
 
-CMD ["/usr/sbin/tmux"]
+CMD ["/home/assistant/.local/bin/herdr"]

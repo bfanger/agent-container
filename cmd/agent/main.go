@@ -119,7 +119,7 @@ func main() {
 		)
 	}
 
-	runArgs = append(runArgs, "agent", "tmux")
+	runArgs = append(runArgs, "agent")
 
 	if *dry {
 		fmt.Println("docker " + strings.Join(runArgs, "\n  "))
