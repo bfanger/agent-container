@@ -64,6 +64,16 @@
           "id": "Qwen3.6-35B-A3B-Yarn",
           "name": "Qwen3.6 35B A3B (1M YaRN q4)",
           "contextWindow": 1000000
+        },
+        {
+          "id": "Muse-Glimmer-30B",
+          "name": "Muse Glimmer 30B (131K)",
+          "contextWindow": 131000
+        },
+        {
+          "id": "Muse-Glimmer-30B-f16",
+          "name": "Muse Glimmer 30B (100K f16)",
+          "contextWindow": 100000
         }
       ]
     }
