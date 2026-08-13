@@ -74,6 +74,11 @@
           "id": "Muse-Glimmer-30B-f16",
           "name": "Muse Glimmer 30B (100K f16)",
           "contextWindow": 100000
+        },
+        {
+          "id": "Muse-Glimmer-30B-DFlash",
+          "name": "Muse Glimmer 30B DFlash (80K)",
+          "contextWindow": 80000
         }
       ]
     }

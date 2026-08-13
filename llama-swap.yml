@@ -4,8 +4,6 @@ models:
     name: Qwen3.6 27B Fast (MTP 40K)
     description: MTP for faster speed at the cost of context length
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.6-27B-MTP-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 --spec-type draft-mtp --spec-draft-n-max 2 --ctx-size 40000
-    aliases:
-      - claude-opus-5
   Qwen3.6-27B-Balanced:
     name: Qwen3.6 27B (50K)
     description: Balance between speed, context and VRAM available for other programs
@@ -25,7 +23,7 @@ models:
   Qwen3.6-27B-Max:
     name: Qwen3.6 27B Max (115K q4)
     description: Bigger lower quality context
-    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-k q4_0 --cache-type-v q4_0 --ctx-size 115000 --threads 12
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-k q4_0 --cache-type-v q4_0 --threads 12 --ctx-size 115000
 
   Muse-Glimmer-30B:
     name: Muse Glimmer 30B (131K)
@@ -33,11 +31,16 @@ models:
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Muse-Glimmer-30B-GGUF\Muse-Glimmer-30B-UD-IQ3_XXS.gguf --temp 1.0 --top-p 0.95 --top-k 64 --n-gpu-layers -1 --parallel 1 --threads 12 --load-mode none --ctx-size 131000
     aliases:
       - claude-sonnet-5
-
   Muse-Glimmer-30B-f16:
     name: Muse Glimmer 30B (100K f16)
     description: Open-weight model from Meta
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Muse-Glimmer-30B-GGUF\Muse-Glimmer-30B-UD-IQ3_XXS.gguf --temp 1.0 --top-p 0.95 --top-k 64 --n-gpu-layers -1 --parallel 1 --cache-type-k q8_0 --cache-type-v q8_0 --threads 12 --load-mode none --ctx-size 100000
+  Muse-Glimmer-30B-DFlash:
+    name: Muse Glimmer 30B DFlash (80K)
+    description: DFlash model for faster decoding at the cost of context
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Muse-Glimmer-30B-GGUF\Muse-Glimmer-30B-UD-IQ3_XXS.gguf --temp 1.0 --top-p 0.95 --top-k 64 --n-gpu-layers -1 --parallel 1 --threads 12 --load-mode none --cache-ram 4096 --spec-draft-model D:\ai-models\meta-models\Muse-Glimmer-30B-GGUF\dflash-Muse-Glimmer-30B-Q4_K_M.gguf --spec-type draft-dflash --gpu-layers-draft all  --cache-type-v q8_0 --cache-type-k q8_0 --ctx-size 80000
+    aliases:
+      - claude-opus-5
 
   Bonsai-27B:
     name: Bonsai 27B (140K)
