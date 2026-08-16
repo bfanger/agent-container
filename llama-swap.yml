@@ -1,5 +1,17 @@
 globalTTL: 600
+
 models:
+  # Qwen3.8 27B
+  Qwen3.8-27B-MTP:
+    name: Qwen3.8 27B (MTP 40K)
+    description: MTP for faster speed at the cost of context length
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.8-27B-GGUF\Qwen3.8-27B-UD-IQ3_XXS.gguf --load-mode none --n-gpu-layers -1 --parallel 1 --spec-type draft-mtp --spec-draft-n-max 2 --spec-cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 --ctx-size 40000
+  Qwen3.8-27B:
+    name: Qwen3.8 27B (55K)
+    description: MTP for faster speed at the cost of context length
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.8-27B-GGUF\Qwen3.8-27B-UD-IQ3_XXS.gguf --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 --ctx-size 55000
+
+  # Qwen3.6 27B
   Qwen3.6-27B-Fast:
     name: Qwen3.6 27B Fast (MTP 40K)
     description: MTP for faster speed at the cost of context length
@@ -25,6 +37,7 @@ models:
     description: Bigger lower quality context
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-k q4_0 --cache-type-v q4_0 --threads 12 --ctx-size 115000
 
+  # Meta's Muse Glimmer 30B
   Muse-Glimmer-30B:
     name: Muse Glimmer 30B (131K)
     description: Open-weight model from Meta
@@ -38,10 +51,11 @@ models:
   Muse-Glimmer-30B-DFlash:
     name: Muse Glimmer 30B DFlash (80K)
     description: DFlash model for faster decoding at the cost of context
-    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Muse-Glimmer-30B-GGUF\Muse-Glimmer-30B-UD-IQ3_XXS.gguf --temp 1.0 --top-p 0.95 --top-k 64 --n-gpu-layers -1 --parallel 1 --threads 12 --load-mode none --cache-ram 4096 --spec-draft-model D:\ai-models\meta-models\Muse-Glimmer-30B-GGUF\dflash-Muse-Glimmer-30B-Q4_K_M.gguf --spec-type draft-dflash --gpu-layers-draft all  --cache-type-v q8_0 --cache-type-k q8_0 --ctx-size 80000
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Muse-Glimmer-30B-GGUF\Muse-Glimmer-30B-UD-IQ3_XXS.gguf --temp 1.0 --top-p 0.95 --top-k 64 --n-gpu-layers -1 --parallel 1 --threads 12 --load-mode none --cache-ram 4096 --spec-draft-model D:\ai-models\unsloth\Muse-Glimmer-30B-GGUF\\dflash-kquant.gguf --spec-type draft-dflash --gpu-layers-draft all  --cache-type-v q8_0 --cache-type-k q8_0 --ctx-size 80000
     aliases:
       - claude-opus-5
 
+  # Prims-ml Bonsai 1bit quant
   Bonsai-27B:
     name: Bonsai 27B (140K)
     description: Bonsai an ultra-compressed 1bit quant of Qwen, allowing for more context at the cost of intelligence
@@ -51,6 +65,7 @@ models:
     description: Bonsai an ultra-compressed 1bit quant with q8 kv cache
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\prism-ml\Bonsai-27B-gguf\Bonsai-27B-Q1_0.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --cache-type-v q8_0 --cache-type-k q8_0 --load-mode none --n-gpu-layers -1 --parallel 1 --threads 12 --ctx-size 250000
 
+  # Qwen 3.6 MOE 35B A3B
   Qwen3.6-35B-A3B-Lightning:
     name: Qwen3.6 35B A3B Lightning (MTP 50K)
     description: Incredible speed at the cost of context and intelligence
