@@ -11,6 +11,8 @@
     "keepRecentTokens": 12000
   },
   "enabledModels": [
+    "llama-swap/Qwen3.8-27B-MTP",
+    "llama-swap/Qwen3.8-27B",
     "llama-swap/Qwen3.6-27B-Fast",
     "llama-swap/Qwen3.6-27B-Balanced",
     "llama-swap/Qwen3.6-27B-Turbo",

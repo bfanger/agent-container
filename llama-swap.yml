@@ -5,7 +5,7 @@ models:
   Qwen3.8-27B-MTP:
     name: Qwen3.8 27B (MTP 40K)
     description: MTP for faster speed at the cost of context length
-    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.8-27B-GGUF\Qwen3.8-27B-UD-IQ3_XXS.gguf --load-mode none --n-gpu-layers -1 --parallel 1 --spec-type draft-mtp --spec-draft-n-max 2 --spec-cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 --ctx-size 40000
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.8-27B-GGUF\Qwen3.8-27B-UD-IQ3_XXS.gguf --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 --spec-type draft-mtp --spec-draft-n-max 2 --ctx-size 40000
   Qwen3.8-27B:
     name: Qwen3.8 27B (55K)
     description: MTP for faster speed at the cost of context length

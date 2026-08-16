@@ -9,6 +9,22 @@
         "baseURL": "http://host.docker.internal:8080/v1"
       },
       "models": {
+        "Qwen3.8-27B-MTP": {
+          "name": "Qwen3.8 27B (MTP 40K)",
+          "limit": {
+            "context": 40000,
+            "input": 40000,
+            "output": 32000
+          }
+        },
+        "Qwen3.8-27B": {
+          "name": "Qwen3.8 27B (55K)",
+          "limit": {
+            "context": 55000,
+            "input": 55000,
+            "output": 32000
+          }
+        },
         "Qwen3.6-27B-Fast": {
           "name": "Qwen3.6 27B Fast (MTP 40K)",
           "limit": {

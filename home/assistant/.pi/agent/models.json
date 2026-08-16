@@ -79,6 +79,16 @@
           "id": "Muse-Glimmer-30B-DFlash",
           "name": "Muse Glimmer 30B DFlash (80K)",
           "contextWindow": 80000
+        },
+        {
+          "id": "Qwen3.8-27B-MTP",
+          "name": "Qwen3.8 27B (MTP 40K)",
+          "contextWindow": 40000
+        },
+        {
+          "id": "Qwen3.8-27B",
+          "name": "Qwen3.8 27B (55K)",
+          "contextWindow": 55000
         }
       ]
     }
