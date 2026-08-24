@@ -1,32 +1,28 @@
 {
-  "images": {
-    "blockImages": true
-  },
   "defaultProvider": "llama-swap",
-  "defaultModel": "Muse-Glimmer-30B-DFlash",
+  "defaultModel": "Qwen3.8-MTP-q4",
   "defaultProjectTrust": "always",
   "compaction": {
     "enabled": true,
     "reserveTokens": 8000,
     "keepRecentTokens": 12000
   },
+  "little_coder": {
+    "default_model_profile": {
+      "thinking_budget": 10000
+    }
+  },
   "enabledModels": [
-    "llama-swap/Qwen3.8-27B-MTP",
-    "llama-swap/Qwen3.8-27B",
-    "llama-swap/Qwen3.6-27B-Fast",
-    "llama-swap/Qwen3.6-27B-Balanced",
-    "llama-swap/Qwen3.6-27B-Turbo",
-    "llama-swap/Qwen3.6-27B-Vision",
-    "llama-swap/Qwen3.6-27B-Mini",
-    "llama-swap/Qwen3.6-27B-Max",
-    "llama-swap/Muse-Glimmer-30B",
-    "llama-swap/Muse-Glimmer-30B-f16",
-    "llama-swap/Muse-Glimmer-30B-DFlash",
-    "llama-swap/Bonsai-27B",
-    "llama-swap/Bonsai-27B-q8",
-    "llama-swap/Qwen3.6-35B-A3B-Lightning",
-    "llama-swap/Qwen3.6-35B-A3B-Balanced",
-    "llama-swap/Qwen3.6-35B-A3B-Offload",
-    "llama-swap/Qwen3.6-35B-A3B-Yarn"
+    "llama-swap/Qwen3.8-MTP-q4",
+    "llama-swap/Qwen3.8-Vision",
+    "llama-swap/Qwen3.8-q4",
+    "llama-swap/Qwen3.8-MTP-q8",
+    "llama-swap/Qwen3.6-MTP-q4",
+    "llama-swap/Qwen3.6-q8",
+    "llama-swap/Qwen3.6-q4",
+    "llama-swap/Qwen3.6-MTP-q8",
+    "llama-swap/Muse-Glimmer",
+    "llama-swap/Muse-Glimmer-f16",
+    "llama-swap/Muse-Glimmer-DFlash"
   ]
 }
