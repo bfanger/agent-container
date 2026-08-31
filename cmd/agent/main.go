@@ -137,6 +137,7 @@ func getMountPaths(subpath string) ([]string, bool) {
 		if _, err := os.Stat(filepath.Join(subpath, "pnpm-lock.yaml")); err == nil {
 			usesPnpm = true
 		}
+
 	}
 
 	if _, err := os.Stat(filepath.Join(subpath, "composer.json")); err == nil {
@@ -148,6 +149,10 @@ func getMountPaths(subpath string) ([]string, bool) {
 		if err == nil && strings.Contains(string(svelteConfig), "kit:") {
 			mountPaths = append(mountPaths, ".svelte-kit")
 		}
+	}
+
+	if _, err := os.Stat(filepath.Join(subpath, "next.config.ts")); err == nil {
+		mountPaths = append(mountPaths, ".next")
 	}
 
 	blacklist := map[string]bool{
