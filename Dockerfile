@@ -11,6 +11,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN useradd --home /home/assistant --create-home --shell /usr/bin/zsh assistant
 
 RUN dnf update -y && dnf install -y \
+  tini \
   zsh \
   git \
   fd-find \
@@ -23,7 +24,7 @@ RUN dnf update -y && dnf install -y \
   nodejs24 \
   neovim \
   golang \
-  chromium firefox libavif libmanette libsecret harfbuzz-icu libwayland-server hyphen enchant2 \
+  chromium firefox libavif libmanette libsecret harfbuzz-icu libwayland-server hyphen enchant2 gstreamer1-plugin-libav libicu libjpeg-turbo \
   jq \
   nmap openssl socat \
   bind-utils \
@@ -55,7 +56,8 @@ RUN curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/in
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 RUN git clone https://github.com/jessarcher/zsh-artisan.git ~/.oh-my-zsh/custom/plugins/artisan
 RUN sed -i "s/plugins=(git)/plugins=(git yarn zsh-autosuggestions composer artisan)/g" ~/.zshrc
-RUN echo "source ~/.config/.zshrc" >>  ~/.zshrc
+RUN pnpm completion zsh >> ~/.zshrc
+RUN echo "source ~/.config/.zshrc" >> ~/.zshrc
 # Vite Plus
 RUN curl -fsSL https://vite.plus | VP_NODE_MANAGER=no bash
 # Claude Code
@@ -87,9 +89,10 @@ RUN herdr integration install pi \
 RUN npx -y skills add herdrdev/herdr --skill herdr -g -y
 
 COPY --chown=assistant:assistant ./home/assistant /home/assistant
-
 EXPOSE 80
 EXPOSE 3000
 EXPOSE 5173
 EXPOSE 8000
+
+ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["/home/assistant/.local/bin/herdr"]
