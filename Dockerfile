@@ -35,7 +35,8 @@ RUN dnf update -y && dnf install -y \
   php php-cli php-fpm php-mysqlnd php-pdo php-gd php-xml php-mbstring php-xdebug php-intl php-redis php-json composer \
   valkey valkey-compat-redis \
   perl-JSON-PP \
-  python3 python3-pip
+  python3 python3-pip \
+  sdl2-compat-devel SDL2_image-devel SDL2_ttf-devel
 
 RUN npm install -g pnpm yarn
 
@@ -47,6 +48,8 @@ COPY --chown=assistant:assistant ./home/assistant/.npmrc /home/assistant/.npmrc
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 # Mise (to allow agents to install runtimes not part of this container)
 RUN curl -Ls https://mise.run | sh
+# Tooling for Go
+RUN go install github.com/bokwoon95/wgo@latest && mise use -g golangci-lint 
 # Oh My Zsh
 RUN curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
@@ -89,5 +92,4 @@ EXPOSE 80
 EXPOSE 3000
 EXPOSE 5173
 EXPOSE 8000
-
 CMD ["/home/assistant/.local/bin/herdr"]
