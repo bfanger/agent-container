@@ -40,6 +40,7 @@ RUN dnf update -y && dnf install -y \
   sdl2-compat-devel SDL2_image-devel SDL2_ttf-devel
 
 RUN npm install -g pnpm yarn
+RUN mkdir /app && chown assistant:assistant /app
 
 USER assistant
 WORKDIR /home/assistant
