@@ -89,6 +89,7 @@ func main() {
 
 	runArgs := []string{
 		"run",
+		"--init",
 		"--rm",
 		"-it",
 		"-P",

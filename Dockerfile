@@ -11,7 +11,6 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN useradd --home /home/assistant --create-home --shell /usr/bin/zsh assistant
 
 RUN dnf update -y && dnf install -y \
-  tini \
   zsh \
   git \
   fd-find \
@@ -21,9 +20,7 @@ RUN dnf update -y && dnf install -y \
   ImageMagick \
   pngquant \
   ffmpeg \
-  nodejs24 \
   neovim \
-  golang \
   chromium firefox libavif libmanette libsecret harfbuzz-icu libwayland-server hyphen enchant2 gstreamer1-plugin-libav libicu libjpeg-turbo \
   jq \
   nmap openssl socat \
@@ -33,11 +30,11 @@ RUN dnf update -y && dnf install -y \
   atop btop \
   poppler-utils \
   plocate \
-  php php-cli php-fpm php-mysqlnd php-pdo php-gd php-xml php-mbstring php-xdebug php-intl php-redis php-json composer \
   valkey valkey-compat-redis \
   perl-JSON-PP \
   python3 python3-pip \
-  sdl2-compat-devel SDL2_image-devel SDL2_ttf-devel
+  sdl2-compat-devel SDL2_image-devel SDL2_ttf-devel \
+  php php-cli php-fpm php-mysqlnd php-pdo php-gd php-xml php-mbstring php-xdebug php-intl php-redis php-json composer
 
 RUN npm install -g pnpm yarn
 RUN mkdir /app && chown assistant:assistant /app
@@ -48,11 +45,16 @@ COPY --chown=assistant:assistant ./home/assistant/.npmrc /home/assistant/.npmrc
 
 # uv (to allow agents to setup python envs)
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-# Mise (to allow agents to install runtimes not part of this container)
+# Mise (also allow agents to install runtimes not part of the container)
 RUN curl -Ls https://mise.run | sh
+# Install up to date versions of programming runtimes  
+RUN \
+  mise use -g golang && \
+  mise use -g node && \
+  mise use -g bun 
 # Tooling for Go
-RUN go install github.com/bokwoon95/wgo@latest && mise use -g golangci-lint 
-# Oh My Zsh
+RUN mise use -g golangci-lint && mise exec golang -- go install github.com/bokwoon95/wgo@latest 
+# Oh My Zsh 
 RUN curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 RUN git clone https://github.com/jessarcher/zsh-artisan.git ~/.oh-my-zsh/custom/plugins/artisan
@@ -95,5 +97,4 @@ EXPOSE 3000
 EXPOSE 5173
 EXPOSE 8000
 
-ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["/home/assistant/.local/bin/herdr"]
