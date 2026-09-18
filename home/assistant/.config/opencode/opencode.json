@@ -6,7 +6,7 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "llama-swap",
       "options": {
-        "baseURL": "http://host.docker.internal:8080/v1"
+        "baseURL": "http://host.docker.internal:9931/v1"
       },
       "models": {
         "Qwen3.8-MTP-q4": {

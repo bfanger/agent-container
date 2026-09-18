@@ -16,7 +16,7 @@ models:
   Qwen3.8-q4:
     name: Qwen 3.8 Context - 110K q4
     description: Balanced towards context
-    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.8-27B-GGUF\Qwen3.8-27B-UD-IQ3_XXS.gguf --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --ctx-size 110000
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.8-27B-GGUF\Qwen3.8-27B-UD-IQ3_XXS.gguf --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --no-reasoning-preserve --ctx-size 110000
   Qwen3.8-MTP-q8:
     name: Qwen 3.8 KV - MTP 43K q8
     description: Balanced towards speed and intelligence

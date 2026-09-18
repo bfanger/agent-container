@@ -28,14 +28,14 @@ func main() {
 		orbstack = flag.Bool("orbstack", false, "Autostart OrbStack")
 	}
 	config := flag.String("llama-swap", "", "Autostart llama-swap using this config")
-	proxy := flag.String("proxy", "", "Autostart proxy on 8080 to [host]:[port]")
+	proxy := flag.String("proxy", "", "Autostart proxy on 9931 to [host]:[port]")
 	flag.Parse()
 
 	wg := sync.WaitGroup{}
 	defer wg.Wait()
 
 	if *proxy != "" && !isOpenApiV1Available() {
-		fmt.Printf("Starting HTTP proxy :8080 to %s\n", *proxy)
+		fmt.Printf("Starting HTTP proxy :9931 to %s\n", *proxy)
 		go proxyServer(*proxy)
 	}
 
@@ -212,7 +212,7 @@ func runDocker(args ...string) {
 
 // proxy server, but no error handling, as that would pollute the tty docker session.
 func proxyServer(target string) {
-	proxy, err := net.Listen("tcp", ":8080")
+	proxy, err := net.Listen("tcp", ":9931")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "failed to start proxy: %v\n", err)
 		os.Exit(1)
@@ -239,7 +239,7 @@ func proxyServer(target string) {
 }
 
 func startLlamaSwap(config string) {
-	cmd := exec.Command("llama-swap", "-watch-config", "-config", config)
+	cmd := exec.Command("llama-swap", "-watch-config", "-listen", ":9931", "-config", config)
 	if err := cmd.Start(); err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to start llama-swap: %v\n", err)
 		os.Exit(1)
@@ -247,11 +247,11 @@ func startLlamaSwap(config string) {
 }
 
 func isOpenApiV1Available() bool {
-	resp, err := http.Get("http://localhost:8080/v1/models")
+	resp, err := http.Get("http://localhost:9931/v1/models")
 	if err != nil {
 		return false
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 	return resp.StatusCode == 200
 }
 

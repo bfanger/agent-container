@@ -1,16 +1,14 @@
 {
   "providers": {
     "llama-swap": {
-      "baseUrl": "http://host.docker.internal:8080/v1",
+      "baseUrl": "http://host.docker.internal:9931/v1",
       "api": "openai-completions",
       "apiKey": "none",
       "models": [
         {
           "id": "Qwen3.8-MTP-q4",
           "name": "Qwen 3.8 - MTP 56K q4",
-          "input": [
-            "text"
-          ],
+          "input": ["text"],
           "contextWindow": 56000,
           "reasoning": true,
           "thinkingLevelMap": {
@@ -24,10 +22,7 @@
         {
           "id": "Qwen3.8-Vision",
           "name": "Qwen 3.8 Vision - 40K q4",
-          "input": [
-            "text",
-            "image"
-          ],
+          "input": ["text", "image"],
           "contextWindow": 40000,
           "reasoning": true,
           "thinkingLevelMap": {
@@ -41,9 +36,7 @@
         {
           "id": "Qwen3.8-q4",
           "name": "Qwen 3.8 Context - 110K q4",
-          "input": [
-            "text"
-          ],
+          "input": ["text"],
           "contextWindow": 110000,
           "reasoning": true,
           "thinkingLevelMap": {
@@ -57,9 +50,7 @@
         {
           "id": "Qwen3.8-MTP-q8",
           "name": "Qwen 3.8 KV - MTP 43K q8",
-          "input": [
-            "text"
-          ],
+          "input": ["text"],
           "contextWindow": 43000,
           "reasoning": true,
           "thinkingLevelMap": {
@@ -73,41 +64,31 @@
         {
           "id": "Qwen3.6-MTP-q4",
           "name": "Qwen 3.6 - MTP 56K q4",
-          "input": [
-            "text"
-          ],
+          "input": ["text"],
           "contextWindow": 56000
         },
         {
           "id": "Qwen3.6-q8",
           "name": "Qwen 3.6 - 50K q8",
-          "input": [
-            "text"
-          ],
+          "input": ["text"],
           "contextWindow": 50000
         },
         {
           "id": "Qwen3.6-q4",
           "name": "Qwen 3.6 Context - 110K q4",
-          "input": [
-            "text"
-          ],
+          "input": ["text"],
           "contextWindow": 110000
         },
         {
           "id": "Qwen3.6-MTP-q8",
           "name": "Qwen 3.6 KV - MTP 40K q8",
-          "input": [
-            "text"
-          ],
+          "input": ["text"],
           "contextWindow": 40000
         },
         {
           "id": "Muse-Glimmer",
           "name": "Muse Glimmer - 131K",
-          "input": [
-            "text"
-          ],
+          "input": ["text"],
           "contextWindow": 131000,
           "reasoning": true,
           "thinkingLevelMap": {
@@ -117,9 +98,7 @@
         {
           "id": "Muse-Glimmer-f16",
           "name": "Muse Glimmer - 100K f16",
-          "input": [
-            "text"
-          ],
+          "input": ["text"],
           "contextWindow": 100000,
           "reasoning": true,
           "thinkingLevelMap": {
@@ -129,9 +108,7 @@
         {
           "id": "Muse-Glimmer-DFlash",
           "name": "Muse Glimmer - DFlash 80K",
-          "input": [
-            "text"
-          ],
+          "input": ["text"],
           "contextWindow": 80000,
           "reasoning": true,
           "thinkingLevelMap": {

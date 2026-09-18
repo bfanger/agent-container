@@ -14,4 +14,4 @@ services:
       - traefik.http.routers.traefik.rule=Host("traefik.localhost")
       - traefik.http.routers.traefik.entrypoints=web
       - traefik.http.routers.traefik.service=traefik
-      - traefik.http.services.traefik.loadbalancer.server.port=8080
+      - traefik.http.services.traefik.loadbalancer.server.port=9931

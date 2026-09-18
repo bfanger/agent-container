@@ -14,7 +14,7 @@ go install ./cmd/agent
 ```
 
 To run a local model:
-Install [LM Studio](https://lmstudio.ai/) and enable the dev server on port 8080 or run [llama.cpp](https://github.com/ggml-org/llama.cpp)
+Install [LM Studio](https://lmstudio.ai/) and enable the dev server on port 9931 or run [llama.cpp](https://github.com/ggml-org/llama.cpp)
 
 ## Running using Docker directly
 
