@@ -48,6 +48,20 @@
           }
         },
         {
+          "id": "Qwen3.8-vram",
+          "name": "Qwen 3.8 - 30K q4",
+          "input": ["text"],
+          "contextWindow": 30000,
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": null,
+            "high": null,
+            "xhigh": "xhigh",
+            "max": null
+          }
+        },
+        {
           "id": "Qwen3.8-MTP-q8",
           "name": "Qwen 3.8 KV - MTP 43K q8",
           "input": ["text"],

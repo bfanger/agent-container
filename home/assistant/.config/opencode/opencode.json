@@ -33,6 +33,14 @@
             "output": 32000
           }
         },
+        "Qwen3.8-vram": {
+          "name": "Qwen 3.8 - 30K q4",
+          "limit": {
+            "context": 30000,
+            "input": 30000,
+            "output": 32000
+          }
+        },
         "Qwen3.8-MTP-q8": {
           "name": "Qwen 3.8 KV - MTP 43K q8",
           "limit": {

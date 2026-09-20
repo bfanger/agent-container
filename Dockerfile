@@ -61,6 +61,10 @@ RUN git clone https://github.com/jessarcher/zsh-artisan.git ~/.oh-my-zsh/custom/
 RUN sed -i "s/plugins=(git)/plugins=(git yarn zsh-autosuggestions composer artisan)/g" ~/.zshrc
 RUN pnpm completion zsh >> ~/.zshrc
 RUN echo "source ~/.config/.zshrc" >> ~/.zshrc
+# Herdr
+RUN curl -fsSL https://herdr.dev/install.sh | sh
+RUN herdr plugin install lucasleon2107/herdr-tab-title-sync --yes \
+  && herdr plugin install rohankewal/herdr-nerd-font-tab-name --yes
 # Vite Plus
 RUN curl -fsSL https://vite.plus | VP_NODE_MANAGER=no bash
 # Claude Code
@@ -70,24 +74,20 @@ RUN npx -y playwright install
 # LazyVim
 COPY --chown=assistant:assistant ./home/assistant/.config/nvim /home/assistant/.config/nvim
 RUN /home/assistant/.config/nvim/neovim-docker-postinstall.sh
+# OpenCode
+RUN npm install -g opencode-ai
 # Pi Agent
 COPY --chown=assistant:assistant ./home/assistant/.pi /home/assistant/.pi
 RUN npm install -g @earendil-works/pi-coding-agent && pi install npm:pi-mcp-adapter && pi install npm:pi-image-subagent && pi install npm:@heyhuynhgiabuu/pi-task && pnpm --dir /home/assistant/.pi/agent/skills/get-console-messages install
 # Agent Browser
 RUN npm install -g agent-browser && pi install npm:pi-agent-browser && if [ "$(uname -m)" != "aarch64" ]; then agent-browser install; fi
-# OpenCode
-RUN npm install -g opencode-ai
 # little-coder
 ENV LITTLE_CODER_PERMISSION_MODE="accept-all"
 RUN npm install -g little-coder && mkdir -p ~/.config/little-coder/extensions && ln -s ~/.pi/agent/npm/node_modules/pi-image-subagent/analyze-image ~/.config/little-coder/extensions/analyze-image
-# Herdr
-RUN curl -fsSL https://herdr.dev/install.sh | sh
+# Herdr integrations
 RUN herdr integration install pi \
   && herdr integration install opencode \
-  && herdr integration install claude \
-  && herdr plugin install lucasleon2107/herdr-tab-title-sync --yes \
-  && herdr plugin install rohankewal/herdr-nerd-font-tab-name --yes
-
+  && herdr integration install claude
 # Skills
 RUN npx -y skills add herdrdev/herdr --skill herdr -g -y
 
