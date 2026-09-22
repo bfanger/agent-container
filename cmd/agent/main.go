@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"io"
@@ -12,6 +13,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"runtime"
+	"slices"
 	"strings"
 	"sync"
 	"time"
@@ -145,10 +147,13 @@ func getMountPaths(subpath string) ([]string, bool) {
 		mountPaths = append(mountPaths, "vendor")
 	}
 
-	if _, err := os.Stat(filepath.Join(subpath, "svelte.config.js")); err == nil {
-		svelteConfig, err := os.ReadFile(filepath.Join(subpath, "svelte.config.js"))
-		if err == nil && strings.Contains(string(svelteConfig), "kit:") {
+	if _, err := os.Stat(filepath.Join(subpath, "package.json")); err == nil {
+		deps, err := getDependencies(filepath.Join(subpath, "package.json"))
+		if err == nil && slices.Contains(deps, "@sveltejs/kit") {
 			mountPaths = append(mountPaths, ".svelte-kit")
+		}
+		if err == nil && slices.Contains(deps, "svelte-check") {
+			mountPaths = append(mountPaths, ".svelte-check")
 		}
 	}
 
@@ -191,6 +196,31 @@ func getMountPaths(subpath string) ([]string, bool) {
 	})
 
 	return mountPaths, usesPnpm
+}
+
+func getDependencies(path string) ([]string, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+
+	var pkg struct {
+		Dependencies     map[string]string `json:"dependencies"`
+		DevDependencies  map[string]string `json:"devDependencies"`
+		PeerDependencies map[string]string `json:"peerDependencies"`
+	}
+	if err := json.Unmarshal(data, &pkg); err != nil {
+		return nil, err
+	}
+
+	names := []string{}
+	for _, deps := range []map[string]string{pkg.Dependencies, pkg.DevDependencies, pkg.PeerDependencies} {
+		for name := range deps {
+			names = append(names, name)
+		}
+	}
+
+	return names, nil
 }
 
 func runDocker(args ...string) {

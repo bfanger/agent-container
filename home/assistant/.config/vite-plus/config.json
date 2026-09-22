@@ -1,6 +1,7 @@
 {
   "nodeShimMode": "system_first",
   "packageManagerShimModes": {
-    "pnpm": "system_first"
+    "pnpm": "system_first",
+    "yarn": "system_first"
   }
 }
