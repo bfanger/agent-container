@@ -25,5 +25,11 @@
     "llama-swap/Muse-Glimmer",
     "llama-swap/Muse-Glimmer-f16",
     "llama-swap/Muse-Glimmer-DFlash"
+  ],
+  "packages": [
+    "npm:pi-mcp-adapter",
+    "npm:pi-image-subagent",
+    "npm:pi-herdr-agents",
+    "npm:pi-agent-browser"
   ]
 }

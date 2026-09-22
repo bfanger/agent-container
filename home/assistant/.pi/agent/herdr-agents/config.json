@@ -1,0 +1,14 @@
+{
+  "status": { "enabled": true },
+  "models": {
+    "default": "llama-swap/Qwen3.8-MTP-q4",
+    "tasks": {
+      "coding": ["llama-swap/Qwen3.8-MTP-q4"],
+      "review": ["llama-swap/Qwen3.8-MTP-q4"],
+      "recon": ["llama-swap/Qwen3.8-MTP-q4"],
+      "qa": ["llama-swap/Qwen3.8-MTP-q4"],
+      "architecture": ["llama-swap/Qwen3.8-MTP-q4"],
+      "docs": ["llama-swap/Qwen3.8-MTP-q4"]
+    }
+  }
+}
