@@ -10,10 +10,10 @@
       },
       "models": {
         "Qwen3.8-MTP-q4": {
-          "name": "Qwen 3.8 - MTP 56K q4",
+          "name": "Qwen 3.8 - MTP 80K q4",
           "limit": {
-            "context": 56000,
-            "input": 56000,
+            "context": 80000,
+            "input": 80000,
             "output": 32000
           }
         },
@@ -26,10 +26,10 @@
           }
         },
         "Qwen3.8-q4": {
-          "name": "Qwen 3.8 Context - 110K q4",
+          "name": "Qwen 3.8 Context - 160K q4",
           "limit": {
-            "context": 110000,
-            "input": 110000,
+            "context": 160000,
+            "input": 160000,
             "output": 32000
           }
         },
@@ -46,6 +46,14 @@
           "limit": {
             "context": 43000,
             "input": 43000,
+            "output": 32000
+          }
+        },
+        "Qwen3.8-unsloth": {
+          "name": "Qwen 3.8 - MTP 56K q4 unsloth",
+          "limit": {
+            "context": 56000,
+            "input": 56000,
             "output": 32000
           }
         },

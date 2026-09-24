@@ -18,6 +18,7 @@
     "llama-swap/Qwen3.8-q4",
     "llama-swap/Qwen3.8-vram",
     "llama-swap/Qwen3.8-MTP-q8",
+    "llama-swap/Qwen3.8-unsloth",
     "llama-swap/Qwen3.6-MTP-q4",
     "llama-swap/Qwen3.6-q8",
     "llama-swap/Qwen3.6-q4",

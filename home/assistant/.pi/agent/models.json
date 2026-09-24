@@ -7,9 +7,9 @@
       "models": [
         {
           "id": "Qwen3.8-MTP-q4",
-          "name": "Qwen 3.8 - MTP 56K q4",
+          "name": "Qwen 3.8 - MTP 80K q4",
           "input": ["text"],
-          "contextWindow": 56000,
+          "contextWindow": 80000,
           "reasoning": true,
           "thinkingLevelMap": {
             "off": null,
@@ -35,9 +35,9 @@
         },
         {
           "id": "Qwen3.8-q4",
-          "name": "Qwen 3.8 Context - 110K q4",
+          "name": "Qwen 3.8 Context - 160K q4",
           "input": ["text"],
-          "contextWindow": 110000,
+          "contextWindow": 160000,
           "reasoning": true,
           "thinkingLevelMap": {
             "off": null,
@@ -66,6 +66,20 @@
           "name": "Qwen 3.8 KV - MTP 43K q8",
           "input": ["text"],
           "contextWindow": 43000,
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": null,
+            "high": null,
+            "xhigh": "xhigh",
+            "max": null
+          }
+        },
+        {
+          "id": "Qwen3.8-unsloth",
+          "name": "Qwen 3.8 - MTP 56K q4 unsloth",
+          "input": ["text"],
+          "contextWindow": 56000,
           "reasoning": true,
           "thinkingLevelMap": {
             "off": null,
