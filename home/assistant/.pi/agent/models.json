@@ -21,9 +21,9 @@
         },
         {
           "id": "Qwen3.8-Vision",
-          "name": "Qwen 3.8 Vision - 40K q4",
+          "name": "Qwen 3.8 Vision - 50K q4",
           "input": ["text", "image"],
-          "contextWindow": 40000,
+          "contextWindow": 50000,
           "reasoning": true,
           "thinkingLevelMap": {
             "off": null,

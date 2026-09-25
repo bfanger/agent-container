@@ -18,10 +18,10 @@
           }
         },
         "Qwen3.8-Vision": {
-          "name": "Qwen 3.8 Vision - 40K q4",
+          "name": "Qwen 3.8 Vision - 50K q4",
           "limit": {
-            "context": 40000,
-            "input": 40000,
+            "context": 50000,
+            "input": 50000,
             "output": 32000
           }
         },
