@@ -90,6 +90,9 @@ RUN herdr integration install pi \
   && herdr integration install claude
 # Skills
 RUN npx -y skills add herdrdev/herdr --skill herdr -g -y
+# MCP preinstall
+ENV BLENDER_HOST="host.docker.internal"
+RUN uvx mcp-for-blender --help
 
 COPY --chown=assistant:assistant ./home/assistant /home/assistant
 EXPOSE 80

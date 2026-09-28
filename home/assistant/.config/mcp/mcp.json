@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "blender": {
+      "command": "uvx",
+      "args": ["mcp-for-blender"],
+      "disabled": true,
+      "directTools": [
+        "get_scene_info",
+        "get_object_info",
+        "execute_blender_code",
+        "bpy_api_lookup",
+        "search_polyhaven_assets",
+        "download_polyhaven_asset",
+        "set_texture",
+        "search_sketchfab_models",
+        "download_sketchfab_model",
+        "search_polypizza_models",
+        "download_polypizza_model"
+      ]
+    }
+  }
+}
