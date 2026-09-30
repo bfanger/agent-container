@@ -32,7 +32,7 @@ RUN dnf update -y && dnf install -y \
   plocate \
   valkey valkey-compat-redis \
   perl-JSON-PP \
-  python3 python3-pip \
+  python3 python3-pip python3-pillow \
   sdl2-compat-devel SDL2_image-devel SDL2_ttf-devel \
   php php-cli php-fpm php-mysqlnd php-pdo php-gd php-xml php-mbstring php-xdebug php-intl php-redis php-json composer
 

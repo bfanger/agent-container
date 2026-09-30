@@ -90,6 +90,20 @@
           }
         },
         {
+          "id": "Qwen3.8-swift",
+          "name": "Qwen 3.8 Swift - MTP 53K q4",
+          "input": ["text"],
+          "contextWindow": 53000,
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": null,
+            "high": null,
+            "xhigh": "xhigh",
+            "max": null
+          }
+        },
+        {
           "id": "Qwen3.6-MTP-q4",
           "name": "Qwen 3.6 - MTP 56K q4",
           "input": ["text"],

@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "llama-swap/Qwen3.8-MTP-q4",
+  "model": "llama-swap/Qwen3.8-swift",
   "provider": {
     "llama-swap": {
       "npm": "@ai-sdk/openai-compatible",
@@ -54,6 +54,14 @@
           "limit": {
             "context": 56000,
             "input": 56000,
+            "output": 32000
+          }
+        },
+        "Qwen3.8-swift": {
+          "name": "Qwen 3.8 Swift - MTP 53K q4",
+          "limit": {
+            "context": 53000,
+            "input": 53000,
             "output": 32000
           }
         },
