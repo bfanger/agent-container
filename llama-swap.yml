@@ -31,7 +31,7 @@ models:
   Qwen3.8-swift:
     name: Qwen 3.8 Swift - MTP 53K q4
     description: UkisAI swift finetune, for faster reasoning
-    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\ukisai\Swift-Qwen3.8-27B-GGUF\Swift-Qwen3.8-27B-IQ3_XXS.gguf -lv 4 --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --spec-type draft-mtp --spec-draft-n-max 3 --ctx-size 53000
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\ukisai\Swift-Qwen3.8-27B-GGUF\Swift-Qwen3.8-27B-IQ3_XXS.gguf --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --spec-type draft-mtp --spec-draft-n-max 3 --ctx-size 53000
 
   # Qwen3.6 27B IQ3
   Qwen3.6-MTP-q4:

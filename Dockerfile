@@ -69,8 +69,8 @@ RUN herdr plugin install lucasleon2107/herdr-tab-title-sync --yes \
 RUN curl -fsSL https://vite.plus | VP_NODE_MANAGER=no bash
 # Claude Code
 RUN curl -fsSL https://claude.ai/install.sh | bash
-# Preinstall Playwright browsers
-RUN npx -y playwright install
+# Preinstall Playwright & Agent Browser
+RUN npx -y playwright install && npm install -g agent-browser  && if [ "$(uname -m)" != "aarch64" ]; then agent-browser install; fi
 # LazyVim
 COPY --chown=assistant:assistant ./home/assistant/.config/nvim /home/assistant/.config/nvim
 RUN /home/assistant/.config/nvim/neovim-docker-postinstall.sh
@@ -78,9 +78,7 @@ RUN /home/assistant/.config/nvim/neovim-docker-postinstall.sh
 RUN npm install -g opencode-ai
 # Pi Agent
 COPY --chown=assistant:assistant ./home/assistant/.pi /home/assistant/.pi
-RUN npm install -g @earendil-works/pi-coding-agent && pi install npm:pi-mcp-adapter && pi install npm:pi-image-subagent && pi install npm:pi-herdr-agents && pnpm --dir /home/assistant/.pi/agent/skills/get-console-messages install
-# Agent Browser
-RUN npm install -g agent-browser && pi install npm:pi-agent-browser && if [ "$(uname -m)" != "aarch64" ]; then agent-browser install; fi
+RUN npm install -g @earendil-works/pi-coding-agent && pi install npm:pi-agent-browser && pi install npm:pi-image-subagent && pi install npm:pi-herdr-agents && pnpm --dir /home/assistant/.pi/agent/skills/get-console-messages install
 # little-coder
 ENV LITTLE_CODER_PERMISSION_MODE="accept-all"
 RUN npm install -g little-coder && mkdir -p ~/.config/little-coder/extensions && ln -s ~/.pi/agent/npm/node_modules/pi-image-subagent/analyze-image ~/.config/little-coder/extensions/analyze-image
@@ -92,7 +90,7 @@ RUN herdr integration install pi \
 RUN npx -y skills add herdrdev/herdr --skill herdr -g -y
 # MCP preinstall
 ENV BLENDER_HOST="host.docker.internal"
-RUN uvx mcp-for-blender --help
+RUN uvx mcp-for-blender --help && npx -y chrome-devtools-mcp --help
 
 COPY --chown=assistant:assistant ./home/assistant /home/assistant
 EXPOSE 80

@@ -2,6 +2,7 @@
   "defaultProvider": "llama-swap",
   "defaultModel": "Qwen3.8-swift",
   "defaultProjectTrust": "always",
+  "hideThinkingBlock": true,
   "compaction": {
     "enabled": true,
     "reserveTokens": 8000,
@@ -9,7 +10,7 @@
   },
   "little_coder": {
     "default_model_profile": {
-      "thinking_budget": 10000
+      "thinking_budget": 12000
     }
   },
   "enabledModels": [
@@ -29,7 +30,6 @@
     "llama-swap/Muse-Glimmer-DFlash"
   ],
   "packages": [
-    "npm:pi-mcp-adapter",
     "npm:pi-image-subagent",
     "npm:pi-herdr-agents",
     "npm:pi-agent-browser"
