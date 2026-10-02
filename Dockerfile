@@ -78,7 +78,7 @@ RUN /home/assistant/.config/nvim/neovim-docker-postinstall.sh
 RUN npm install -g opencode-ai
 # Pi Agent
 COPY --chown=assistant:assistant ./home/assistant/.pi /home/assistant/.pi
-RUN npm install -g @earendil-works/pi-coding-agent && pi install npm:pi-agent-browser && pi install npm:pi-image-subagent && pi install npm:pi-herdr-agents && pnpm --dir /home/assistant/.pi/agent/skills/get-console-messages install
+RUN npm install -g @earendil-works/pi-coding-agent && pi install npm:pi-agent-browser && pi install npm:pi-image-subagent && pi install npm:@tintinweb/pi-subagents && pnpm --dir /home/assistant/.pi/agent/skills/get-console-messages install
 # little-coder
 ENV LITTLE_CODER_PERMISSION_MODE="accept-all"
 RUN npm install -g little-coder && mkdir -p ~/.config/little-coder/extensions && ln -s ~/.pi/agent/npm/node_modules/pi-image-subagent/analyze-image ~/.config/little-coder/extensions/analyze-image

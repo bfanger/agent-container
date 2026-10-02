@@ -31,7 +31,7 @@
   ],
   "packages": [
     "npm:pi-image-subagent",
-    "npm:pi-herdr-agents",
+    "npm:@tintinweb/pi-subagents",
     "npm:pi-agent-browser"
   ]
 }
