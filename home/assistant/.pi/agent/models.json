@@ -6,7 +6,7 @@
       "apiKey": "none",
       "models": [
         {
-          "id": "Qwen3.8-MTP-q4",
+          "id": "qwen3.8-balanced",
           "name": "Qwen 3.8 - MTP 80K q4",
           "input": ["text"],
           "contextWindow": 80000,
@@ -20,7 +20,7 @@
           }
         },
         {
-          "id": "Qwen3.8-Vision",
+          "id": "qwen3.8-vision",
           "name": "Qwen 3.8 Vision - 64K q4",
           "input": ["text", "image"],
           "contextWindow": 64000,
@@ -34,7 +34,7 @@
           }
         },
         {
-          "id": "Qwen3.8-q4",
+          "id": "qwen3.8-context",
           "name": "Qwen 3.8 Context - 160K q4",
           "input": ["text"],
           "contextWindow": 160000,
@@ -48,7 +48,7 @@
           }
         },
         {
-          "id": "Qwen3.8-vram",
+          "id": "qwen3.8-vram",
           "name": "Qwen 3.8 - 30K q4",
           "input": ["text"],
           "contextWindow": 30000,
@@ -62,7 +62,7 @@
           }
         },
         {
-          "id": "Qwen3.8-MTP-q8",
+          "id": "qwen3.8-mtp-q8",
           "name": "Qwen 3.8 KV - MTP 43K q8",
           "input": ["text"],
           "contextWindow": 43000,
@@ -76,7 +76,7 @@
           }
         },
         {
-          "id": "Qwen3.8-unsloth",
+          "id": "qwen3.8-unsloth",
           "name": "Qwen 3.8 - MTP 56K q4 unsloth",
           "input": ["text"],
           "contextWindow": 56000,
@@ -90,7 +90,7 @@
           }
         },
         {
-          "id": "Qwen3.8-swift",
+          "id": "qwen3.8-swift",
           "name": "Qwen 3.8 Swift - MTP 53K q4",
           "input": ["text"],
           "contextWindow": 53000,
@@ -104,31 +104,31 @@
           }
         },
         {
-          "id": "Qwen3.6-MTP-q4",
+          "id": "qwen3.6-mtp-q4",
           "name": "Qwen 3.6 - MTP 56K q4",
           "input": ["text"],
           "contextWindow": 56000
         },
         {
-          "id": "Qwen3.6-q8",
+          "id": "qwen3.6-q8",
           "name": "Qwen 3.6 - 50K q8",
           "input": ["text"],
           "contextWindow": 50000
         },
         {
-          "id": "Qwen3.6-q4",
+          "id": "qwen3.6-q4",
           "name": "Qwen 3.6 Context - 110K q4",
           "input": ["text"],
           "contextWindow": 110000
         },
         {
-          "id": "Qwen3.6-MTP-q8",
+          "id": "qwen3.6-mtp-q8",
           "name": "Qwen 3.6 KV - MTP 40K q8",
           "input": ["text"],
           "contextWindow": 40000
         },
         {
-          "id": "Muse-Glimmer",
+          "id": "muse-glimmer",
           "name": "Muse Glimmer - 131K",
           "input": ["text"],
           "contextWindow": 131000,
@@ -138,7 +138,7 @@
           }
         },
         {
-          "id": "Muse-Glimmer-f16",
+          "id": "muse-glimmer-f16",
           "name": "Muse Glimmer - 100K f16",
           "input": ["text"],
           "contextWindow": 100000,
@@ -148,7 +148,7 @@
           }
         },
         {
-          "id": "Muse-Glimmer-DFlash",
+          "id": "muse-glimmer-dflash",
           "name": "Muse Glimmer - DFlash 80K",
           "input": ["text"],
           "contextWindow": 80000,

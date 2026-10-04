@@ -2,67 +2,67 @@ globalTTL: 600
 
 models:
   # Qwen3.8 27B IQ3
-  Qwen3.8-MTP-q4:
+  qwen3.8-swift:
+    name: Qwen 3.8 Swift - MTP 53K q4
+    description: UkisAI swift finetune, for faster reasoning
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\ukisai\Swift-qwen3.8-27B-GGUF\Swift-qwen3.8-27B-IQ3_XXS.gguf --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --spec-type draft-mtp --spec-draft-n-max 3 --ctx-size 53000
+  qwen3.8-balanced:
     name: Qwen 3.8 - MTP 80K q4
     description: Balanced towards speed and context
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\ISTA-DASLab\Qwen3.8-27B-GSQ-RCO-GGUF\Qwen3.8-27B-GSQ-RCO-IQ3_XXS-mtp.gguf --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --spec-type draft-mtp --spec-draft-n-max 3 --ctx-size 80000
     aliases:
       - claude-opus-5
       - claude-opus-5-5
-  Qwen3.8-Vision:
+  qwen3.8-vision:
     name: Qwen 3.8 Vision - 64K q4
     description: Vision enabled
-    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\ISTA-DASLab\Qwen3.8-27B-GSQ-RCO-GGUF\Qwen3.8-27B-GSQ-RCO-IQ3_XXS-mtp.gguf --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --mmproj D:\ai-models\ISTA-DASLab\Qwen3.8-27B-GSQ-RCO-GGUF\mmproj-Qwen3.8-27B-BF16.gguf --ctx-size 64000
-  Qwen3.8-q4:
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\ISTA-DASLab\Qwen3.8-27B-GSQ-RCO-GGUF\Qwen3.8-27B-GSQ-RCO-IQ3_XXS-mtp.gguf --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --mmproj D:\ai-models\ISTA-DASLab\Qwen3.8-27B-GSQ-RCO-GGUF\mmproj-qwen3.8-27B-BF16.gguf --ctx-size 64000
+  qwen3.8-context:
     name: Qwen 3.8 Context - 160K q4
     description: Balanced towards context
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\ISTA-DASLab\Qwen3.8-27B-GSQ-RCO-GGUF\Qwen3.8-27B-GSQ-RCO-IQ3_XXS-mtp.gguf --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --no-reasoning-preserve --ctx-size 160000
-  Qwen3.8-vram:
+  qwen3.8-vram:
     name: Qwen 3.8 - 30K q4
     description: Balanced towards free video memory
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\ISTA-DASLab\Qwen3.8-27B-GSQ-RCO-GGUF\Qwen3.8-27B-GSQ-RCO-IQ3_XXS-mtp.gguf --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 2048 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --no-reasoning-preserve --ctx-size 30000
-  Qwen3.8-MTP-q8:
+  qwen3.8-mtp-q8:
     name: Qwen 3.8 KV - MTP 43K q8
     description: Balanced towards speed and intelligence
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\ISTA-DASLab\Qwen3.8-27B-GSQ-RCO-GGUF\Qwen3.8-27B-GSQ-RCO-IQ3_S-mtp.gguf --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --spec-type draft-mtp --spec-draft-n-max 3 --ctx-size 43000
-  Qwen3.8-unsloth:
+  qwen3.8-unsloth:
     name: Qwen 3.8 - MTP 56K q4 unsloth
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.8-27B-GGUF\Qwen3.8-27B-UD-IQ3_XXS.gguf --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --spec-type draft-mtp --spec-draft-n-max 3 --ctx-size 56000
-  Qwen3.8-swift:
-    name: Qwen 3.8 Swift - MTP 53K q4
-    description: UkisAI swift finetune, for faster reasoning
-    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\ukisai\Swift-Qwen3.8-27B-GGUF\Swift-Qwen3.8-27B-IQ3_XXS.gguf --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --spec-type draft-mtp --spec-draft-n-max 3 --ctx-size 53000
 
-  # Qwen3.6 27B IQ3
-  Qwen3.6-MTP-q4:
+  # Qwen3.6 27B IQ3 unsloth
+  qwen3.6-mtp-q4:
     name: Qwen 3.6 - MTP 56K q4
     description: Balance towards speed and context
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.6-27B-MTP-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --spec-type draft-mtp --spec-draft-n-max 3 --ctx-size 56000
-  Qwen3.6-q8:
+  qwen3.6-q8:
     name: Qwen 3.6 - 50K q8
     description: Balance towards intelligence
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 --threads 12 --ctx-size 50000
-  Qwen3.6-q4:
+  qwen3.6-q4:
     name: Qwen 3.6 Context - 110K q4
     description: Balanced towards context
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.6-27B-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-k q4_0 --cache-type-v q4_0 --threads 12 --ctx-size 110000
-  Qwen3.6-MTP-q8:
+  qwen3.6-mtp-q8:
     name: Qwen 3.6 KV - MTP 40K q8
     description: MTP for faster speed at the cost of context length
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.6-27B-MTP-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 --threads 12 --spec-type draft-mtp --spec-draft-n-max 3 --ctx-size 40000
 
   # Meta's Muse Glimmer 30B
-  Muse-Glimmer:
+  muse-glimmer:
     name: Muse Glimmer - 131K
     description: Open-weight model from Meta
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Muse-Glimmer-30B-GGUF\Muse-Glimmer-30B-UD-IQ3_XXS.gguf --temp 1.0 --top-p 0.95 --top-k 64 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --threads 12 --ctx-size 131000
     aliases:
       - claude-sonnet-5
-  Muse-Glimmer-f16:
+  muse-glimmer-f16:
     name: Muse Glimmer - 100K f16
     description: Open-weight model from Meta
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Muse-Glimmer-30B-GGUF\Muse-Glimmer-30B-UD-IQ3_XXS.gguf --temp 1.0 --top-p 0.95 --top-k 64 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q8_0 --cache-type-k q8_0 --threads 12 --ctx-size 100000
-  Muse-Glimmer-DFlash:
+  muse-glimmer-dflash:
     name: Muse Glimmer - DFlash 80K
     description: DFlash model for faster decoding at the cost of context
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Muse-Glimmer-30B-GGUF\Muse-Glimmer-30B-UD-IQ3_XXS.gguf --temp 1.0 --top-p 0.95 --top-k 64 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 --threads 12 --spec-type draft-dflash --spec-draft-model D:\ai-models\unsloth\Muse-Glimmer-30B-GGUF\\dflash-kquant.gguf --gpu-layers-draft all --ctx-size 80000

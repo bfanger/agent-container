@@ -1,6 +1,6 @@
 {
   "defaultProvider": "llama-swap",
-  "defaultModel": "Qwen3.8-swift",
+  "defaultModel": "qwen3.8-swift",
   "defaultProjectTrust": "always",
   "hideThinkingBlock": true,
   "compaction": {
@@ -14,20 +14,12 @@
     }
   },
   "enabledModels": [
-    "llama-swap/Qwen3.8-MTP-q4",
-    "llama-swap/Qwen3.8-Vision",
-    "llama-swap/Qwen3.8-q4",
-    "llama-swap/Qwen3.8-vram",
-    "llama-swap/Qwen3.8-MTP-q8",
-    "llama-swap/Qwen3.8-unsloth",
-    "llama-swap/Qwen3.8-swift",
-    "llama-swap/Qwen3.6-MTP-q4",
-    "llama-swap/Qwen3.6-q8",
-    "llama-swap/Qwen3.6-q4",
-    "llama-swap/Qwen3.6-MTP-q8",
-    "llama-swap/Muse-Glimmer",
-    "llama-swap/Muse-Glimmer-f16",
-    "llama-swap/Muse-Glimmer-DFlash"
+    "llama-swap/qwen3.8-swift",
+    "llama-swap/qwen3.8-balanced",
+    "llama-swap/qwen3.8-vision",
+    "llama-swap/qwen3.8-context",
+    "llama-swap/qwen3.8-vram",
+    "llama-swap/muse-glimmer"
   ],
   "packages": [
     "npm:pi-image-subagent",

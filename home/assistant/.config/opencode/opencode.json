@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "llama-swap/Qwen3.8-swift",
+  "model": "llama-swap/qwen3.8-swift",
   "provider": {
     "llama-swap": {
       "npm": "@ai-sdk/openai-compatible",
@@ -9,7 +9,7 @@
         "baseURL": "http://host.docker.internal:9931/v1"
       },
       "models": {
-        "Qwen3.8-MTP-q4": {
+        "qwen3.8-balanced": {
           "name": "Qwen 3.8 - MTP 80K q4",
           "limit": {
             "context": 80000,
@@ -17,7 +17,7 @@
             "output": 32000
           }
         },
-        "Qwen3.8-Vision": {
+        "qwen3.8-vision": {
           "name": "Qwen 3.8 Vision - 64K q4",
           "limit": {
             "context": 64000,
@@ -25,7 +25,7 @@
             "output": 32000
           }
         },
-        "Qwen3.8-q4": {
+        "qwen3.8-context": {
           "name": "Qwen 3.8 Context - 160K q4",
           "limit": {
             "context": 160000,
@@ -33,7 +33,7 @@
             "output": 32000
           }
         },
-        "Qwen3.8-vram": {
+        "qwen3.8-vram": {
           "name": "Qwen 3.8 - 30K q4",
           "limit": {
             "context": 30000,
@@ -41,7 +41,7 @@
             "output": 32000
           }
         },
-        "Qwen3.8-MTP-q8": {
+        "qwen3.8-mtp-q8": {
           "name": "Qwen 3.8 KV - MTP 43K q8",
           "limit": {
             "context": 43000,
@@ -49,7 +49,7 @@
             "output": 32000
           }
         },
-        "Qwen3.8-unsloth": {
+        "qwen3.8-unsloth": {
           "name": "Qwen 3.8 - MTP 56K q4 unsloth",
           "limit": {
             "context": 56000,
@@ -57,7 +57,7 @@
             "output": 32000
           }
         },
-        "Qwen3.8-swift": {
+        "qwen3.8-swift": {
           "name": "Qwen 3.8 Swift - MTP 53K q4",
           "limit": {
             "context": 53000,
@@ -65,7 +65,7 @@
             "output": 32000
           }
         },
-        "Qwen3.6-MTP-q4": {
+        "qwen3.6-mtp-q4": {
           "name": "Qwen 3.6 - MTP 56K q4",
           "limit": {
             "context": 56000,
@@ -73,7 +73,7 @@
             "output": 32000
           }
         },
-        "Qwen3.6-q8": {
+        "qwen3.6-q8": {
           "name": "Qwen 3.6 - 50K q8",
           "limit": {
             "context": 50000,
@@ -81,7 +81,7 @@
             "output": 32000
           }
         },
-        "Qwen3.6-q4": {
+        "qwen3.6-q4": {
           "name": "Qwen 3.6 Context - 110K q4",
           "limit": {
             "context": 110000,
@@ -89,7 +89,7 @@
             "output": 32000
           }
         },
-        "Qwen3.6-MTP-q8": {
+        "qwen3.6-mtp-q8": {
           "name": "Qwen 3.6 KV - MTP 40K q8",
           "limit": {
             "context": 40000,
@@ -97,7 +97,7 @@
             "output": 32000
           }
         },
-        "Muse-Glimmer": {
+        "muse-glimmer": {
           "name": "Muse Glimmer - 131K",
           "limit": {
             "context": 131000,
@@ -105,7 +105,7 @@
             "output": 32000
           }
         },
-        "Muse-Glimmer-f16": {
+        "muse-glimmer-f16": {
           "name": "Muse Glimmer - 100K f16",
           "limit": {
             "context": 100000,
@@ -113,7 +113,7 @@
             "output": 32000
           }
         },
-        "Muse-Glimmer-DFlash": {
+        "muse-glimmer-dflash": {
           "name": "Muse Glimmer - DFlash 80K",
           "limit": {
             "context": 80000,
