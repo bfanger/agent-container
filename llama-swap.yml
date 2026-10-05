@@ -3,13 +3,9 @@ globalTTL: 600
 models:
   # Qwen3.8 27B IQ3
   qwen3.8-swift:
-    name: Qwen 3.8 Swift - MTP 53K q4
-    description: UkisAI swift finetune, for faster reasoning
-    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\ukisai\Swift-qwen3.8-27B-GGUF\Swift-qwen3.8-27B-IQ3_XXS.gguf --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --spec-type draft-mtp --spec-draft-n-max 3 --ctx-size 53000
-  qwen3.8-balanced:
-    name: Qwen 3.8 - MTP 80K q4
-    description: Balanced towards speed and context
-    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\ISTA-DASLab\Qwen3.8-27B-GSQ-RCO-GGUF\Qwen3.8-27B-GSQ-RCO-IQ3_XXS-mtp.gguf --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --spec-type draft-mtp --spec-draft-n-max 3 --ctx-size 80000
+    name: Qwen 3.8 Swift - MTP 80K q4
+    description: UkisAI swift finetune, for faster reasoning and improved compression
+    cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\ukisai\Swift-1.5-Qwen3.8-27B-GSQ-RCO-GGUF\Swift-1.5-Qwen3.8-27B-GSQ-RCO-IQ3_XXS-mtp.gguf --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --cache-type-v q4_0 --cache-type-k q4_0 --cache-ram 4096 --threads 12 --chat-template-kwargs "{\"reasoning_effort\":\"medium\"}" --spec-type draft-mtp --spec-draft-n-max 3 --ctx-size 80000
     aliases:
       - claude-opus-5
       - claude-opus-5-5

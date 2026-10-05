@@ -15,7 +15,6 @@
   },
   "enabledModels": [
     "llama-swap/qwen3.8-swift",
-    "llama-swap/qwen3.8-balanced",
     "llama-swap/qwen3.8-vision",
     "llama-swap/qwen3.8-context",
     "llama-swap/qwen3.8-vram",

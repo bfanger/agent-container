@@ -5,9 +5,10 @@
       "api": "openai-completions",
       "apiKey": "none",
       "models": [
+
         {
-          "id": "qwen3.8-balanced",
-          "name": "Qwen 3.8 - MTP 80K q4",
+          "id": "qwen3.8-swift",
+          "name": "Qwen 3.8 Swift - MTP 80K q4",
           "input": ["text"],
           "contextWindow": 80000,
           "reasoning": true,
@@ -80,20 +81,6 @@
           "name": "Qwen 3.8 - MTP 56K q4 unsloth",
           "input": ["text"],
           "contextWindow": 56000,
-          "reasoning": true,
-          "thinkingLevelMap": {
-            "off": null,
-            "minimal": null,
-            "high": null,
-            "xhigh": "xhigh",
-            "max": null
-          }
-        },
-        {
-          "id": "qwen3.8-swift",
-          "name": "Qwen 3.8 Swift - MTP 53K q4",
-          "input": ["text"],
-          "contextWindow": 53000,
           "reasoning": true,
           "thinkingLevelMap": {
             "off": null,

@@ -9,8 +9,8 @@
         "baseURL": "http://host.docker.internal:9931/v1"
       },
       "models": {
-        "qwen3.8-balanced": {
-          "name": "Qwen 3.8 - MTP 80K q4",
+        "qwen3.8-swift": {
+          "name": "Qwen 3.8 Swift - MTP 80K q4",
           "limit": {
             "context": 80000,
             "input": 80000,
@@ -54,14 +54,6 @@
           "limit": {
             "context": 56000,
             "input": 56000,
-            "output": 32000
-          }
-        },
-        "qwen3.8-swift": {
-          "name": "Qwen 3.8 Swift - MTP 53K q4",
-          "limit": {
-            "context": 53000,
-            "input": 53000,
             "output": 32000
           }
         },
