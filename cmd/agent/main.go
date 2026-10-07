@@ -31,6 +31,8 @@ func main() {
 	}
 	config := flag.String("llama-swap", "", "Autostart llama-swap using this config")
 	proxy := flag.String("proxy", "", "Autostart proxy on 9931 to [host]:[port]")
+	writableGit := flag.Bool("writable-git", false, "Allow write access to the .git folder (default: readonly)")
+
 	flag.Parse()
 
 	wg := sync.WaitGroup{}
@@ -61,9 +63,8 @@ func main() {
 		panic(err)
 	}
 
-	homeDir, err := os.UserHomeDir()
-	if err == nil && projectPath == homeDir {
-		fmt.Fprintln(os.Stderr, "Error: not inside a project")
+	if !isInsideGitRepo(projectPath) {
+		fmt.Fprintln(os.Stderr, "Error: not inside a project (no .git detected)")
 		os.Exit(1)
 	}
 
@@ -119,6 +120,13 @@ func main() {
 		runArgs = append(runArgs,
 			"--mount",
 			fmt.Sprintf("type=volume,src=%s,volume-subpath=%s,destination=/app/%s/%s", volume, path, projectSlug, path),
+		)
+	}
+
+	if !*writableGit && isDir(filepath.Join(projectPath, ".git")) {
+		runArgs = append(runArgs,
+			"--mount",
+			fmt.Sprintf("type=bind,src=%s,destination=/app/%s/.git,readonly", filepath.Join(projectPath, ".git"), projectSlug),
 		)
 	}
 
@@ -287,6 +295,16 @@ func isOpenApiV1Available() bool {
 
 func isDockerRunning() bool {
 	cmd := exec.Command("docker", "info")
+	return cmd.Run() == nil
+}
+
+func isDir(path string) bool {
+	info, err := os.Stat(path)
+	return err == nil && info.IsDir()
+}
+
+func isInsideGitRepo(dir string) bool {
+	cmd := exec.Command("git", "-C", dir, "rev-parse", "--is-inside-work-tree")
 	return cmd.Run() == nil
 }
 
