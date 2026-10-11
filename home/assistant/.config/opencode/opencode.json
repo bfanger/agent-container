@@ -89,6 +89,14 @@
             "output": 32000
           }
         },
+        "qwen3.8-flash-next": {
+          "name": "Qwen Flash Next 125B A6B - 64K",
+          "limit": {
+            "context": 64000,
+            "input": 64000,
+            "output": 32000
+          }
+        },
         "muse-glimmer": {
           "name": "Muse Glimmer - 131K",
           "limit": {
