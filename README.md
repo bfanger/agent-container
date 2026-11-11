@@ -61,4 +61,4 @@ See [llama-swap.yaml](./llama-swap.yml) for my llama.cpp settings & models.
 - MTP multi token prediction can almost double the performance, at the cost of vram.
 - [pi](https://pi.dev) with its smaller base prompt is a good fit for smaller models
 - Agents want to start the dev server and then wait and do nothing.
-- Testing a model on day of the release can be unfair because of missing support from tooling like llama.cpp
+- Testing a model on the day of the release can be unfair because of missing support from tooling like llama.cpp

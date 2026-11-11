@@ -19,6 +19,9 @@
         },
         "qwen3.8-vision": {
           "name": "Qwen 3.8 Vision - 64K q4",
+          "modalities": {
+            "input": ["text", "image"]
+          },
           "limit": {
             "context": 64000,
             "input": 64000,
@@ -89,11 +92,11 @@
             "output": 32000
           }
         },
-        "qwen3.8-flash-next": {
-          "name": "Qwen Flash Next 125B A6B - 64K",
+        "qfn-gyro-s": {
+          "name": "Qwen Flash Next - Strata Gyro S - 128K",
           "limit": {
-            "context": 64000,
-            "input": 64000,
+            "context": 128000,
+            "input": 128000,
             "output": 32000
           }
         },

@@ -10,7 +10,7 @@
   },
   "little_coder": {
     "default_model_profile": {
-      "thinking_budget": 12000
+      "thinking_budget": 16000
     }
   },
   "enabledModels": [
@@ -18,7 +18,7 @@
     "llama-swap/qwen3.8-vision",
     "llama-swap/qwen3.8-context",
     "llama-swap/qwen3.8-vram",
-    "llama-swap/qwen3.8-flash-next",
+    "llama-swap/qfn-gyro-s",
     "llama-swap/muse-glimmer"
   ],
   "packages": [

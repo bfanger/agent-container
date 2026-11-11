@@ -47,10 +47,10 @@ models:
     description: MTP for faster speed at the cost of context length
     cmd: C:\Users\bfang\Projects\llama\llama-server.exe --port ${PORT} --model D:\ai-models\unsloth\Qwen3.6-27B-MTP-GGUF\Qwen3.6-27B-UD-IQ3_XXS.gguf --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 --fit off --load-mode none --n-gpu-layers -1 --parallel 1 --flash-attn on --cache-type-v q8_0 --cache-type-k q8_0 --cache-ram 4096 --threads 12 --spec-type draft-mtp --spec-draft-n-max 3 --ctx-size 40000
 
-  qwen3.8-flash-next:
-    name: Qwen Flash Next 125B A6B - 64K
-    description: Strata - Optimized for intelligence, 64K context
-    cmd: D:\ai-models\Strata\.venv\Scripts\python.exe D:\ai-models\Strata\serve\server.py --port ${PORT} --engine strata --config D:\ai-models\Strata\strata-coder-iq1_m.json
+  qfn-gyro-s:
+    name: Qwen Flash Next - Strata Gyro S - 128K
+    description: Strata - Optimized for intelligence & speed at the cost of system memory, 128K context
+    cmd: D:\ai-models\Strata\.venv\Scripts\python.exe D:\ai-models\Strata\serve\server.py --port ${PORT} --engine strata --config D:\ai-models\Strata\strata-gyro-gyro-s.json
 
   # Meta's Muse Glimmer 30B
   muse-glimmer:

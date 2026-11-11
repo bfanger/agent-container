@@ -169,6 +169,10 @@ func getMountPaths(subpath string) ([]string, bool) {
 		mountPaths = append(mountPaths, ".next")
 	}
 
+	if _, err := os.Stat(filepath.Join(subpath, "pyproject.toml")); err == nil {
+		mountPaths = append(mountPaths, ".venv", "__pycache__")
+	}
+
 	blacklist := map[string]bool{
 		"node_modules": true,
 		"vendor":       true,

@@ -17,7 +17,7 @@ RUN dnf update -y && dnf install -y \
   ripgrep \
   langpacks-en \
   tmux \
-  ImageMagick \
+  ImageMagick libheif \
   pngquant \
   ffmpeg \
   neovim \
@@ -51,7 +51,8 @@ RUN curl -Ls https://mise.run | sh
 RUN \
   mise use -g golang && \
   mise use -g node && \
-  mise use -g bun 
+  mise use -g bun && \
+  mise use -g gh 
 # Tooling for Go
 RUN mise use -g golangci-lint && mise exec golang -- go install github.com/bokwoon95/wgo@latest 
 # Oh My Zsh 
