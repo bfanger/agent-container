@@ -1,0 +1,47 @@
+--- a/analyze-image/index.ts
++++ b/analyze-image/index.ts
+@@ -267,17 +267,42 @@
+ // Extension
+ // ============================================================================
+ 
++function modelSupportsImages(model: unknown): boolean {
++	return (
++		typeof model === "object" &&
++		model !== null &&
++		Array.isArray((model as { input?: unknown[] }).input) &&
++		(model as { input: unknown[] }).input.includes("image")
++	);
++}
++
+ export default function (pi: ExtensionAPI) {
+ 	let config = loadConfig();
+ 
+-	// Reload config on each new session
+-	pi.on("session_start", () => {
++	function syncToolAvailability(model: unknown) {
++		const active = pi.getActiveTools();
++		const isEnabled = active.includes("analyze_image");
++		const shouldEnable = !modelSupportsImages(model);
++		if (isEnabled && !shouldEnable) {
++			pi.setActiveTools(active.filter((name) => name !== "analyze_image"));
++		} else if (!isEnabled && shouldEnable) {
++			pi.setActiveTools([...active, "analyze_image"]);
++		}
++	}
++
++	pi.on("session_start", (_event, ctx) => {
+ 		config = loadConfig();
++		syncToolAvailability(ctx.model);
++	});
++
++	pi.on("model_select", (event) => {
++		syncToolAvailability(event.model);
+ 	});
+ 
+ 	pi.registerTool({
+ 		name: "analyze_image",
+ 		label: "Analyze Image",
++		defaultActive: false,
+ 		description: [
+ 			"Analyze one or more images using a vision-capable model.",
+ 			"Provide local file paths and a question about the images.",
